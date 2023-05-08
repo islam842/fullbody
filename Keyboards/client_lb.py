@@ -7,7 +7,7 @@ answer_markup = ReplyKeyboardMarkup(
 ).add(
     KeyboardButton("1"),
     KeyboardButton("2"),
-    KeyboardButton("отмена")
+    KeyboardButton("тестти токтотуу")
 
 )
 #     KeyboardButton("BACKEND"),
@@ -51,5 +51,5 @@ cancel_markup = ReplyKeyboardMarkup(
 
 
 ).add(
-    KeyboardButton("ОТМЕНА"),
+    KeyboardButton("кайрадан отуу"),
 )

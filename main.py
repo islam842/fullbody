@@ -13,7 +13,7 @@ import requests
 from bs4 import BeautifulSoup
 from aiogram.utils import executor
 import logging
-from Keyboards.client_lb import answer_markup, submit_markup
+from Keyboards.client_lb import answer_markup, submit_markup, cancel_markup
 
 # Настройка логгирования
 logging.basicConfig(level=logging.INFO)
@@ -68,7 +68,7 @@ async def answer_q1(message: types.Message, state: FSMContext):
 @dp.message_handler(state=Test.Q2)
 async def answer_q2(message: types.Message, state: FSMContext):
     answer = message.text.strip()
-    if answer == 'отмена':
+    if answer == 'тестти токтотуу':
         await message.answer("Тест токтоду. Кайра отууго (/start) командасын жибериниз")
         await state.finish()
     else:
@@ -82,7 +82,7 @@ async def answer_q2(message: types.Message, state: FSMContext):
 @dp.message_handler(state=Test.Q3)
 async def answer_q3(message: types.Message, state: FSMContext):
     answer = message.text.strip()
-    if answer == 'отмена':
+    if answer == 'тестти токтотуу':
         await message.answer("Тест токтоду. Кайра отууго (/start) командасын жибериниз")
         await state.finish()
     else:
@@ -96,7 +96,7 @@ async def answer_q3(message: types.Message, state: FSMContext):
 @dp.message_handler(state=Test.Q4)
 async def answer_q4(message: types.Message, state: FSMContext):
     answer = message.text.strip()
-    if answer == 'отмена':
+    if answer == 'тестти токтотуу':
         await message.answer("Тест токтоду. Кайра отууго (/start) командасын жибериниз")
         await state.finish()
     else:
@@ -110,7 +110,7 @@ async def answer_q4(message: types.Message, state: FSMContext):
 @dp.message_handler(state=Test.Q5)
 async def answer_q5(message: types.Message, state: FSMContext):
     answer = message.text.strip()
-    if answer == 'отмена':
+    if answer == 'тестти токтотуу':
         await message.answer("Тест токтоду. Кайра отууго (/start) командасын жибериниз")
         await state.finish()
     else:
@@ -124,7 +124,7 @@ async def answer_q5(message: types.Message, state: FSMContext):
 @dp.message_handler(state=Test.Q6)
 async def answer_q6(message: types.Message, state: FSMContext):
     answer = message.text.strip()
-    if answer == 'отмена':
+    if answer == 'тестти токтотуу':
         await message.answer("Тест токтоду. Кайра отууго (/start) командасын жибериниз")
         await state.finish()
     else:
@@ -139,7 +139,7 @@ async def answer_q6(message: types.Message, state: FSMContext):
 @dp.message_handler(state=Test.Q7)
 async def answer_q7(message: types.Message, state: FSMContext):
     answer = message.text.strip()
-    if answer == 'отмена':
+    if answer == 'тестти токтотуу':
         await message.answer("Тест токтоду. Кайра отууго (/start) командасын жибериниз")
         await state.finish()
     else:
@@ -153,7 +153,7 @@ async def answer_q7(message: types.Message, state: FSMContext):
 @dp.message_handler(state=Test.Q8)
 async def answer_q8(message: types.Message, state: FSMContext):
     answer = message.text.strip()
-    if answer == 'отмена':
+    if answer == 'тестти токтотуу':
         await message.answer("Тест токтоду. Кайра отууго (/start) командасын жибериниз")
         await state.finish()
     else:
@@ -167,7 +167,7 @@ async def answer_q8(message: types.Message, state: FSMContext):
 @dp.message_handler(state=Test.Q9)
 async def answer_q9(message: types.Message, state: FSMContext):
     answer = message.text.strip()
-    if answer == 'отмена':
+    if answer == 'тестти токтотуу':
         await message.answer("Тест токтоду. Кайра отууго (/start) командасын жибериниз")
         await state.finish()
     else:
@@ -181,7 +181,7 @@ async def answer_q9(message: types.Message, state: FSMContext):
 @dp.message_handler(state=Test.Q10)
 async def answer_q10(message: types.Message, state: FSMContext):
     answer = message.text.strip()
-    if answer == 'отмена':
+    if answer == 'тестти токтотуу':
         await message.answer("Тест токтоду. Кайра отууго (/start) командасын жибериниз")
         await state.finish()
     else:
@@ -195,7 +195,7 @@ async def answer_q10(message: types.Message, state: FSMContext):
 @dp.message_handler(state=Test.Q11)
 async def answer_q11(message: types.Message, state: FSMContext):
     answer = message.text.strip()
-    if answer == 'отмена':
+    if answer == 'тестти токтотуу':
         await message.answer("Тест токтоду. Кайра отууго (/start) командасын жибериниз")
         await state.finish()
     else:
@@ -209,14 +209,13 @@ async def answer_q11(message: types.Message, state: FSMContext):
 @dp.message_handler(state=Test.Q12)
 async def answer_q12(message: types.Message, state: FSMContext):
     answer = message.text.strip()
-    if answer == 'отмена':
+    if answer == 'тестти токтотуу':
         await message.answer("Тест токтоду. Кайра отууго (/start) командасын жибериниз")
         await state.finish()
     else:
         await state.update_data(q11=answer) # Сохранение ответа на третий вопрос
         await message.answer('Жакшы! Он экинчи суроо:\nКайсы жумушту тандайт элеңиз?\n'
-                         '1.Адамдарын ортосундагы талаш-тартыштарды,чыр-чатакты чечүү, ишендирүү, түшүндүрүү, \
-                         дем берүү,жасалоону\n'
+                         '1.Адамдарын ортосундагы талаш-тартыштарды,чыр-чатакты чечүү, ишендирүү, түшүндүрүү,дем берүү,жасалоону\n'
                          '2.Чиймелерди,схемаларды, таблицаларды түшүнүү(түшүнүү,тактоо,иретке келтирүү)', reply_markup=answer_markup)
         await Test.Q13.set() # Переход к пятому вопросу
 
@@ -224,7 +223,7 @@ async def answer_q12(message: types.Message, state: FSMContext):
 @dp.message_handler(state=Test.Q13)
 async def answer_q13(message: types.Message, state: FSMContext):
     answer = message.text.strip()
-    if answer == 'отмена':
+    if answer == 'тестти токтотуу':
         await message.answer("Тест токтоду. Кайра отууго (/start) командасын жибериниз")
         await state.finish()
     else:
@@ -238,7 +237,7 @@ async def answer_q13(message: types.Message, state: FSMContext):
 @dp.message_handler(state=Test.Q14)
 async def answer_q14(message: types.Message, state: FSMContext):
     answer = message.text.strip()
-    if answer == 'отмена':
+    if answer == 'тестти токтотуу':
         await message.answer("Тест токтоду. Кайра отууго (/start) командасын жибериниз")
         await state.finish()
     else:
@@ -252,7 +251,7 @@ async def answer_q14(message: types.Message, state: FSMContext):
 @dp.message_handler(state=Test.Q15)
 async def answer_q15(message: types.Message, state: FSMContext):
     answer = message.text.strip()
-    if answer == 'отмена':
+    if answer == 'тестти токтотуу':
         await message.answer("Тест токтоду. Кайра отууго (/start) командасын жибериниз")
         await state.finish()
     else:
@@ -266,7 +265,7 @@ async def answer_q15(message: types.Message, state: FSMContext):
 @dp.message_handler(state=Test.Q16)
 async def answer_q16(message: types.Message, state: FSMContext):
     answer = message.text.strip()
-    if answer == 'отмена':
+    if answer == 'тестти токтотуу':
         await message.answer("Тест токтоду. Кайра отууго (/start) командасын жибериниз")
         await state.finish()
     else:
@@ -280,7 +279,7 @@ async def answer_q16(message: types.Message, state: FSMContext):
 @dp.message_handler(state=Test.Q17)
 async def answer_q17(message: types.Message, state: FSMContext):
     answer = message.text.strip()
-    if answer == 'отмена':
+    if answer == 'тестти токтотуу':
         await message.answer("Тест токтоду. Кайра отууго (/start) командасын жибериниз")
         await state.finish()
     else:
@@ -294,7 +293,7 @@ async def answer_q17(message: types.Message, state: FSMContext):
 @dp.message_handler(state=Test.Q18)
 async def answer_q18(message: types.Message, state: FSMContext):
     answer = message.text.strip()
-    if answer == 'отмена':
+    if answer == 'тестти токтотуу':
         await message.answer("Тест токтоду. Кайра отууго (/start) командасын жибериниз")
         await state.finish()
     else:
@@ -308,7 +307,7 @@ async def answer_q18(message: types.Message, state: FSMContext):
 @dp.message_handler(state=Test.Q19)
 async def answer_q19(message: types.Message, state: FSMContext):
     answer = message.text.strip()
-    if answer == 'отмена':
+    if answer == 'тестти токтотуу':
         await message.answer("Тест токтоду. Кайра отууго (/start) командасын жибериниз")
         await state.finish()
     else:
@@ -322,7 +321,7 @@ async def answer_q19(message: types.Message, state: FSMContext):
 @dp.message_handler(state=Test.Q20)
 async def answer_q20(message: types.Message, state: FSMContext):
     answer = message.text.strip()
-    if answer == 'отмена':
+    if answer == 'тестти токтотуу':
         await message.answer("Тест токтоду. Кайра отууго (/start) командасын жибериниз")
         await state.finish()
     else:
@@ -336,7 +335,7 @@ async def answer_q20(message: types.Message, state: FSMContext):
 @dp.message_handler(state=Test.END)
 async def answer_end(message: types.Message, state: FSMContext):
     answer = message.text.strip()
-    if answer == 'отмена':
+    if answer == 'тестти токтотуу':
         await message.answer("Тест токтоду. Кайра отууго (/start) командасын жибериниз")
         await state.finish()
     else:
@@ -366,7 +365,19 @@ async def answer_end(message: types.Message, state: FSMContext):
             and q9 == '1' and q10 == '2' and q11 == '2' and q12 == '2' and q13 == '1' and q14 == '1' and q15 == '1'\
             and q16 == '2' and q17 == '2' and q18 == '1' and q19 == '1' and q20 == '2':
         result = 'Адам-Техника'
+    elif q1 == '2' and q2 == '2' and q3 == '1' and q4 == '1' and q5 == '1' and q6 == '2' and q7 == '1' and q8 == '2' \
+            and q9 == '1' and q10 == '2' and q11 == '2' and q12 == '2' and q13 == '1' and q14 == '1' and q15 == '1' \
+            and q16 == '2' and q17 == '2' and q18 == '1' and q19 == '1' and q20 == '2':
+        result = 'Адам-Техника'
+    elif q1 == '2' and q2 == '2' and q3 == '1' and q4 == '1' and q5 == '1' and q6 == '1' and q7 == '1' and q8 == '2' \
+            and q9 == '1' and q10 == '2' and q11 == '2' and q12 == '2' and q13 == '1' and q14 == '1' and q15 == '1' \
+            and q16 == '2' and q17 == '2' and q18 == '1' and q19 == '1' and q20 == '2':
+        result = 'Адам-Техника'
     elif q1 == '1' and q2 == '1' and q3 == '2' and q4 == '1' and q5 == '1' and q6 == '1' and q7 == '1' and q8 == '2'\
+            and q9 == '1' and q10 == '1' and q11 == '1' and q12 == '2' and q13 == '2' and q14 == '2' and q15 == '1'\
+            and q16 == '1' and q17 == '1' and q18 == '2' and q19 == '2' and q20 == '1':
+        result = 'Адам-Жаратылыш'
+    elif q1 == '1' and q2 == '1' and q3 == '1' and q4 == '1' and q5 == '1' and q6 == '1' and q7 == '1' and q8 == '2'\
             and q9 == '1' and q10 == '1' and q11 == '1' and q12 == '2' and q13 == '2' and q14 == '2' and q15 == '1'\
             and q16 == '1' and q17 == '1' and q18 == '2' and q19 == '2' and q20 == '1':
         result = 'Адам-Жаратылыш'
@@ -374,7 +385,19 @@ async def answer_end(message: types.Message, state: FSMContext):
             and q9 == '2' and q10 == '2' and q11 == '2' and q12 == '1' and q13 == '1' and q14 == '2' and q15 == '2'\
             and q16 == '2' and q17 == '2' and q18 == '1' and q19 == '1' and q20 == '2':
         result = 'Адам-корком образ'
+    elif q1 == '1' and q2 == '2' and q3 == '1' and q4 == '2' and q5 == '2' and q6 == '2' and q7 == '1' and q8 == '2'\
+            and q9 == '2' and q10 == '2' and q11 == '2' and q12 == '1' and q13 == '1' and q14 == '2' and q15 == '2'\
+            and q16 == '2' and q17 == '2' and q18 == '1' and q19 == '1' and q20 == '2':
+        result = 'Адам-корком образ'
+    elif q1 == '2' and q2 == '2' and q3 == '1' and q4 == '2' and q5 == '2' and q6 == '2' and q7 == '1' and q8 == '1'\
+            and q9 == '2' and q10 == '2' and q11 == '2' and q12 == '1' and q13 == '1' and q14 == '2' and q15 == '2'\
+            and q16 == '2' and q17 == '2' and q18 == '1' and q19 == '1' and q20 == '2':
+        result = 'Адам-корком образ'
     elif q1 == '2' and q2 == '1' and q3 == '1' and q4 == '2' and q5 == '1' and q6 == '2' and q7 == '2' and q8 == '2'\
+            and q9 == '1' and q10 == '2' and q11 == '2' and q12 == '2' and q13 == '1' and q14 == '1' and q15 == '1'\
+            and q16 == '2' and q17 == '2' and q18 == '2' and q19 == '2' and q20 == '2':
+        result = 'Адам-адам'
+    elif q1 == '2' and q2 == '1' and q3 == '1' and q4 == '2' and q5 == '1' and q6 == '2' and q7 == '2' and q8 == '1'\
             and q9 == '1' and q10 == '2' and q11 == '2' and q12 == '2' and q13 == '1' and q14 == '1' and q15 == '1'\
             and q16 == '2' and q17 == '2' and q18 == '2' and q19 == '2' and q20 == '2':
         result = 'Адам-адам'
@@ -382,8 +405,23 @@ async def answer_end(message: types.Message, state: FSMContext):
             and q9 == '1' and q10 == '1' and q11 == '1' and q12 == '1' and q13 == '1' and q14 == '2' and q15 == '2'\
             and q16 == '2' and q17 == '1' and q18 == '1' and q19 == '2' and q20 == '1':
         result = 'Адам-системалык белги'
+    elif q1 == '1' and q2 == '1' and q3 == '2' and q4 == '2' and q5 == '2' and q6 == '2' and q7 == '2' and q8 == '2' \
+            and q9 == '1' and q10 == '1' and q11 == '1' and q12 == '1' and q13 == '1' and q14 == '2' and q15 == '2' \
+            and q16 == '2' and q17 == '1' and q18 == '1' and q19 == '2' and q20 == '1':
+        result = 'Адам-системалык белги'
+    elif q1 == '2' and q2 == '2' and q3 == '2' and q4 == '2' and q5 == '2' and q6 == '2' and q7 == '1' and q8 == '2' \
+            and q9 == '1' and q10 == '1' and q11 == '1' and q12 == '1' and q13 == '1' and q14 == '2' and q15 == '2' \
+            and q16 == '2' and q17 == '1' and q18 == '1' and q19 == '2' and q20 == '1':
+        result = 'Адам-системалык белги'
+    elif q1 == '1' and q2 == '2' and q3 == '2' and q4 == '2' and q5 == '2' and q6 == '2' and q7 == '1' and q8 == '2'\
+            and q9 == '1' and q10 == '1' and q11 == '1' and q12 == '1' and q13 == '1' and q14 == '2' and q15 == '2'\
+            and q16 == '2' and q17 == '1' and q18 == '1' and q19 == '2' and q20 == '1':
+
+        result = 'Адам-системалык белги'
     else:
-        result = 'Жыйынтыгыныз так чыкпай калды.Сураныч тестти кайрадан отунуз!'
+        result = 'Жыйынтыгыныз так чыкпай калды.Сураныч тестти кайрадан отунуз!\n' \
+                 'Кайрадан отууго (/start) командасын жибериниз.'
+        await state.finish()
 
     await message.answer(f'Жоопторунузга рахмат! Сиздин жыйынтык:\n{result}')
 
