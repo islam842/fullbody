@@ -1,22 +1,17 @@
-import logging
-from config import bot, dp, TOKEN
-import random
-import aiogram.utils.markdown as md
-from aiogram import Bot, Dispatcher, types
-from aiogram.contrib.fsm_storage.memory import MemoryStorage
+from config import dp, bot
 from aiogram.dispatcher import FSMContext
-from aiogram.dispatcher.filters import Text
 from aiogram.dispatcher.filters.state import State, StatesGroup
-from aiogram.types import ParseMode, ReplyKeyboardRemove, InlineKeyboardButton, InlineKeyboardMarkup
-from aiogram.types.message import ContentTypes
-import requests
-from bs4 import BeautifulSoup
-from aiogram.utils import executor
 import logging
-from Keyboards.client_lb import answer_markup, submit_markup, cancel_markup
+from Keyboards.client_kb import answer_markup, give, ans_markup, submit_markup, cancel_markup, active_markup, mot_markup, an_markup, a_markup, b_markup, FUNC, func_markup
+import asyncio
+import random
+from handlers.functwo import register_handlers_extra  # Импортируем функции из вашего файла handlers
+from handlers.funcone import register_handlers_extra1  # Импортируем функции из вашего файла handlers
+from aiogram import types
+from aiogram.dispatcher.filters import Command
 
-# Настройка логгирования
 logging.basicConfig(level=logging.INFO)
+register_handlers_extra1(dp)
 
 
 class Test(StatesGroup):
@@ -28,318 +23,275 @@ class Test(StatesGroup):
     Q6 = State()  # Состояние для шестого вопроса
     Q7 = State()  # Состояние для седьмого вопроса
     Q8 = State()  # Состояние для восьмого вопроса
-    Q9 = State()  # Состояние для девятого вопроса
-    Q10 = State()  # Состояние для десятого вопроса
-    Q11 = State()  # Состояние для первого вопроса
-    Q12 = State()  # Состояние для второго вопроса
-    Q13 = State()  # Состояние для третьего вопроса
-    Q14 = State()  # Состояние для четвертого вопроса
-    Q15 = State()  # Состояние для пятого вопроса
-    Q16 = State()  # Состояние для шестого вопроса
-    Q17 = State()  # Состояние для седьмого вопроса
-    Q18 = State()  # Состояние для восьмого вопроса
-    Q19 = State()  # Состояние для девятого вопроса
-    Q20 = State()
-    END = State()  # Состояние для вывода результатов теста
+    Q9 = State()
+    random = State()
+    END = State()
+    Q10 = State()
+    FUNC1 = State()
+    FUNC2 = State()
+    MENU = State()
+    QUIZ = State()
 
 
-# Начало теста
+
 @dp.message_handler(commands=['start'])
-async def start_test(message: types.Message):
-    await message.answer('Салам! Мен сага кесип тандаганга жардам берем. 20 суроого даярсынбы? (ооба)',reply_markup=submit_markup)
-    await Test.Q1.set()  # Переход к первому вопросу
-
-
-# Обработка первого вопроса
-@dp.message_handler(state=Test.Q1)
 async def answer_q1(message: types.Message, state: FSMContext):
     answer = message.text.strip().lower()
-    if answer == 'ооба':
-        await message.answer('Эн жакшы! Биринчи суроо:\n'
-                             'Дүйнөдө эки гана кесип болсо, экөөнүн ичинен кайсы кесипти тандайт элеңиз?\n'
-                             'Кайсы жумушту тандайт элеңиз?\n'
-                             '1.Жаныбарларга кам көрүү\n'
-                             '2.Машиналарды жана приборлорду тейлөө?', reply_markup=answer_markup)
-        await Test.Q2.set()  # Переход ко второму вопросу
-    else:
-        await message.answer('Сураныч (ооба) басыныз!')
+    photo_path = "C:\\Users\\User\\Downloads\\Untitled 50.png"
+    with open(photo_path, 'rb') as photo:
+        await message.answer_photo(photo)
+    await message.answer('Добро пожаловать в уникального Телеграмм бота для тренировок и набора массы!\n'
+                         '\n'
+                         'Наш бот адаптируется к вашим потребностям, учитывая ваше тело, вес, рост и процент жира.\n'
+                         'Получайте персональные планы тренировок на ближайшую неделю, а также возможность выполнять '
+                         'упражнения вместе с ботом.\n'
+                         '\n'
+                         'Наша главная задача - помочь вам достичь ваших целей. Готовы начать?', reply_markup=ans_markup)
+    await Test.Q2.set()  # Переход ко второму вопросу
 
 
 @dp.message_handler(state=Test.Q2)
 async def answer_q2(message: types.Message, state: FSMContext):
     answer = message.text.strip()
-    if answer == 'тестти токтотуу':
-        await message.answer("Тест токтоду. Кайра отууго (/start) командасын жибериниз")
-        await state.finish()
-    else:
-        await state.update_data(q1=answer)
-        await message.answer('Жакшы! Экинчи суроо:\nКайсы жумушту тандайт элеңиз?\n'
-                             '1.Оорулуу адамдарга жардам берүү\n'
-                             '2.Таблицаларды, диаграммаларды,компьютердик программаларды түзүүнү?', reply_markup=answer_markup)
+    if answer == 'НАЧАТЬ!':
+        await message.answer("Как вас зовут?")
         await Test.Q3.set()  # Переход к третьему вопросу
+    elif answer == "О НАС":
+        photo_path = "C:\\Users\\User\\OneDrive\\Изображения\\Untitled (9).png"
+        with open(photo_path, 'rb') as photo:
+            # Отправляем фото в чат
+            await message.answer_photo(photo)
+        await message.answer("Добро пожаловать в мир FULLBODY! Мы - стартап-проект, созданный с любовью к здоровью "
+                             "и фитнесу. \n"
+                             "\n"
+                             "Наша цель - помочь вам достичь своих тренировочных целей и набрать массу. \n"
+                             "С нашей помощью вы сможете улучшить свою физическую форму и достичь лучших "
+                             "результатов. \n"
+                             "Давайте вместе преобразим ваше тело и жизнь!\n"
+                             "\n"
+                             "Телеграмм канал проекта - https://t.me/fullbodyproject\n"
+                             "ТикТок аккаунт проекта - \n"
+                             "Инстаграмм аккаунт проекта - \n"
+                             "FULL-PHONK-BODY музыка фонки - https://t.me/full_phonk_body", reply_markup=answer_markup)
+    elif answer == "ХОЧУ ЗАДАТЬ ВОПРОС":
+        await message.answer("Выберите вопрос который хотите задать?", reply_markup=submit_markup)
+        await Test.QUIZ.set()
+    elif answer == "МЕНЮ":
+        await message.answer("Вы в меню выберите команду:", reply_markup=b_markup)
+        await Test.MENU.set()
+    elif answer == "ФУНКЦИИ БОТА":
+        await message.answer("ВЫБЕРИТЕ ФУНКЦИЮ", reply_markup=func_markup)
+        await Test.FUNC1.set()
+    else:
+        await message.answer("Выберите команду!")
 
 
 @dp.message_handler(state=Test.Q3)
 async def answer_q3(message: types.Message, state: FSMContext):
     answer = message.text.strip()
-    if answer == 'тестти токтотуу':
-        await message.answer("Тест токтоду. Кайра отууго (/start) командасын жибериниз")
-        await state.finish()
+    if answer.isalpha():
+        await state.update_data(q2=answer)  # Сохранение ответа на второй вопрос
+        data = await state.get_data()  # Получение всех ответов
+        q2 = data.get('q2')
+        name = q2
+        await message.answer(f'Отлично {name}, Ваш рост? (см)')
+        await Test.Q4.set()  # Переход к пятому вопросу
     else:
-        await state.update_data(q2=answer) # Сохранение ответа на второй вопрос
-        await message.answer('Эн жакшы! Учунчу суроо:\nКайсы жумушту тандайт элеңиз?\n'
-                             '1.Китеп иллюстрацияларынын, плакаттардын, көркөм открыткалардын сапатына көз салууну\n'
-                             '2.Өсүмдүктөрдүн абалына жана өнүгүшүнө мониторинг жүргүзүүнү', reply_markup=answer_markup)
-        await Test.Q4.set()# Переход к четвертому вопросу
+        await message.answer("Пожалуйста введите ваше имя!")
 
 
 @dp.message_handler(state=Test.Q4)
 async def answer_q4(message: types.Message, state: FSMContext):
     answer = message.text.strip()
-    if answer == 'тестти токтотуу':
-        await message.answer("Тест токтоду. Кайра отууго (/start) командасын жибериниз")
-        await state.finish()
+    if answer.isdigit():
+        await state.update_data(q3=answer)  # Сохранение ответа на третий вопрос
+        await message.answer('Очень хорошо! Ваш возраст?')
+        await Test.Q5.set()  # Переход к пятому вопросу
     else:
-        await state.update_data(q3=answer) # Сохранение ответа на третий вопрос
-        await message.answer('Эн жакшы! Тортунчу суроо:\nКайсы жумушту тандайт элеңиз?\n'
-                             '1.Процесс материалдары(жыгач,кездеме,металл,пластик)\n'
-                             '2.Керектөөчүгө товар алып келүүнү(жарнамалоо,сатуу)', reply_markup=answer_markup)
-        await Test.Q5.set() # Переход к пятому вопросу
+        await message.answer("Пожалуйста введите ваш рост!")
 
 
 @dp.message_handler(state=Test.Q5)
 async def answer_q5(message: types.Message, state: FSMContext):
     answer = message.text.strip()
-    if answer == 'тестти токтотуу':
-        await message.answer("Тест токтоду. Кайра отууго (/start) командасын жибериниз")
-        await state.finish()
+    if answer.isdigit():
+        await state.update_data(q4=answer)  # Сохранение ответа на четвертый вопрос
+        await message.answer('Отлично! Ваш вес? (кг)\n')
+        await Test.Q6.set()  # Переход к пятому вопросу
     else:
-        await state.update_data(q4=answer) # Сохранение ответа на четвертый вопрос
-        await message.answer('Абдан жакшы! Бешинчи суроо:\nКайсы жумушту тандайт элеңиз?\n'
-                             '1.Илимий-популярдуу китептерди,макалаларды талкуулоону\n'
-                             '2.Көркөм китептерди талкуулоону', reply_markup=answer_markup)
-        await Test.Q6.set() # Переход к шестому вопросу
+        await message.answer("Пожалуйста введите ваш возраст!")
 
 
 @dp.message_handler(state=Test.Q6)
-async def answer_q6(message: types.Message, state: FSMContext):
+async def answer_q7(message: types.Message, state: FSMContext):
     answer = message.text.strip()
-    if answer == 'тестти токтотуу':
-        await message.answer("Тест токтоду. Кайра отууго (/start) командасын жибериниз")
-        await state.finish()
+    if answer.isdigit():
+        await state.update_data(q5=answer)  #
+        await message.answer("Ваш образ жизни?\n"
+                             "(Сидячий)\n"
+                             "(Умеренный)\n"
+                             "(Активный)", reply_markup=active_markup)
+        await Test.Q7.set()
     else:
-        await state.update_data(q5=answer) # Сохранение ответа на пятый вопрос
-        await message.answer('Эн сонун! Алтынчы суроо:\nКайсы жумушту тандайт элеңиз?\n'
-                             '1.Ар кандай тукумдагы жаш малды багуу\n'
-                             '2.Теңтуштарды(же жаш балдарды)кандайдыр бир\
-                             аракеттерди жасоого үйрөтүүнү(эмгек,спорт)', reply_markup=answer_markup)
-        await Test.Q7.set() # Переход к седьмому вопросу
+        await message.answer("Введите ваш вес!")
 
 
 @dp.message_handler(state=Test.Q7)
 async def answer_q7(message: types.Message, state: FSMContext):
     answer = message.text.strip()
-    if answer == 'тестти токтотуу':
-        await message.answer("Тест токтоду. Кайра отууго (/start) командасын жибериниз")
-        await state.finish()
+    if answer.isalpha():
+        await state.update_data(q6=answer)  # Сохранение ответа на пятый вопрос
+        await message.answer("Ваш уровень мотивации?\n"
+                             "\n"
+                             "Низкое(Могу пропустить пару тренировок из-за настроении.)\n"
+                             "\n"
+                             "Среднее(Могу регулярно ходить и не пропускать тренировки.)\n"
+                             "\n"
+                             "Хорошая(Не пропускаю тренировки, дисциплинированный.)", reply_markup=mot_markup)
+        await Test.Q8.set()
     else:
-        await state.update_data(q6=answer) # Сохранение ответа на шестой вопрос
-        await message.answer('Эн жакшы! Жетинчи суроо:\nКайсы жумушту тандайт элеңиз?\n'
-                             '1.Сүрөттөрдү көчүрүү, музыкалык аспаптарды күүлөөнү\n'
-                             '2.Ар турду жүктү көтөрүүчү унааны(кран, трактор, тепловоз)айдоону',reply_markup=answer_markup)
-        await Test.Q8.set()  # Переход к девятому вопросу
+        await message.answer("Введите команду (/start) что бы начать заново.")
+        await state.finish()
 
 
 @dp.message_handler(state=Test.Q8)
-async def answer_q8(message: types.Message, state: FSMContext):
+async def answer_q6(message: types.Message, state: FSMContext):
     answer = message.text.strip()
-    if answer == 'тестти токтотуу':
-        await message.answer("Тест токтоду. Кайра отууго (/start) командасын жибериниз")
-        await state.finish()
+    await state.update_data(q7=answer)
+    if answer.isalpha():
+        data = await state.get_data()
+        q3 = data.get('q3')
+        q4 = data.get('q4')
+        q5 = data.get('q5')
+        await message.answer('Всё верно? \n'
+                             f'\nВаш рост: {q3}см\n'
+                             f'\nВаш возраст: {q4}\n'
+                             f'\n'
+                             f'Ваш вес: {q5}кг', reply_markup=cancel_markup)
+        await Test.Q9.set()
     else:
-        await state.update_data(q7=answer) # Сохранение ответа на седьмой вопрос
-        await message.answer('Жакшы! Сегизинчи суроо:\nКайсы жумушту тандайт элеңиз?\n'
-                             '1.Адамдар менен баарлашуу,аларга керектүү маалыматты түшүндүрүү(маалымат столунда,экскурсияла)\n'
-                             '2.Көргөзмөлөрдү,витриналарды көркөм жасалгалоого, спектаклдерди, концерттерди даярдоого катышуу', reply_markup=answer_markup)
-        await Test.Q9.set() # Переход к девятому вопросу
+        await message.answer("Пожалуйста введите ваш вес!")
 
 
 @dp.message_handler(state=Test.Q9)
-async def answer_q9(message: types.Message, state: FSMContext):
+async def answer_q7(message: types.Message, state: FSMContext):
     answer = message.text.strip()
-    if answer == 'тестти токтотуу':
-        await message.answer("Тест токтоду. Кайра отууго (/start) командасын жибериниз")
-        await state.finish()
+    if answer == "Да":
+        await state.update_data(q8=answer)  # Сохранение ответа на пятый вопрос
+        await message.answer("Обработка ваших данных....")
+        delay_seconds = 5
+        await asyncio.sleep(delay_seconds)
+        await message.answer("Обработка прошла успешно! Получить подробный план?", reply_markup=cancel_markup)
+        await Test.END.set()
     else:
-        await state.update_data(q8=answer) # Сохранение ответа на восьмой вопрос
-        await message.answer('Абдан жакшы! Тогузунчу суроо:\nКайсы жумушту тандайт элеңиз?\n'
-                             '1.Ремонт буюмдары(кийим-кече, жабдуулар),турак жай\n'
-                             '2.Тексттерден,таблицалардан,фигуралардан каталарды издөө жана оңдоо',reply_markup=answer_markup)
-        await Test.Q10.set() # Переход к десятому вопросу
+        await message.answer("Введите команду (/start) что бы начать заново.")
+        await state.finish()
 
 
-@dp.message_handler(state=Test.Q10)
-async def answer_q10(message: types.Message, state: FSMContext):
+@dp.message_handler(state=Test.QUIZ)
+async def answer_quiz(message: types.Message, state: FSMContext):
     answer = message.text.strip()
-    if answer == 'тестти токтотуу':
-        await message.answer("Тест токтоду. Кайра отууго (/start) командасын жибериниз")
-        await state.finish()
+    if answer == "Что такое спортпитание?":
+        await message.answer("Спортпитание - это особый вид питания и добавок, который помогает спортсменам улучшить "
+                             "свои результаты в тренировках, спортивных соревнованиях "
+                             "и восстановиться после них.",reply_markup=submit_markup)
+    elif answer == "Что такое тренировки?":
+        await message.answer("Тренировки - это физические упражнения и занятия, проводимые с целью улучшения "
+                             "физической "
+                             "формы, развития навыков или достижения спортивных целей.",reply_markup=submit_markup)
+    elif answer == "Как быстро могу набрать массу?":
+        await message.answer("Чтобы быстро набрать массу, нужно сосредоточиться на трех ключевых факторах:\n"
+                             "1.Питание: Увеличьте прием калорий, увеличивая потребление белков, углеводов и здоровых "
+                             "жиров.\n"
+                             "2.Тренировки: Сосредоточьтесь на силовых тренировках, чтобы стимулировать рост мышц.\n"
+                             "3.Восстановление: Обеспечьте организм достаточным сном и отдыхом, чтобы мышцы могли "
+                             "восстанавливаться и расти.\n"
+                             "Однако помните, что набор массы требует времени и усилий, и важно выполнять это процесс"
+                             " здорово и уравновешенно, под контролем специалиста, если возможно.",reply_markup=submit_markup)
+    elif answer == "Сколько времени стабильно нужно уделять?":
+        await message.answer("Чтобы стабильно набирать массу, рекомендуется тренироваться примерно 3-5 раз в неделю.\n"
+                             " Это позволит вам обеспечить достаточный стимул для роста мышц и прогресса в вашей цели"
+                             " набора массы",reply_markup=submit_markup)
+    elif answer == "Чем полезен проект?":
+        await message.answer("Наш Телеграмм-бот - идеальное решение для тренировок и набора мышечной массы.\n"
+                             "-Он уникален, так как адаптируется к вашему телу, весу, росту и проценту жира,\n"
+                             "-предоставляя индивидуальные планы тренировок на неделю.\n"
+                             "-Мы также предоставляем возможность совместных упражнений,\n"
+                             "обеспечивая оптимальное время отдыха и максимальный прогресс.\n"
+                             "-В будущем, мы также добавим режимы для похудения и достижения конкретных целей, делая"
+                             " нашего бота многофункциональным помощником в вашей тренировке!", reply_markup=submit_markup)
+    elif answer == "МЕНЮ":
+        await message.answer("Вы в меню, выберите команду.", reply_markup=b_markup)
+        await Test.MENU.set()
     else:
-        await state.update_data(q9=answer)  # Сохранение ответа на первый вопрос
-        await message.answer('Жакшы! Онунчу суроо:\nКайсы жумушту тандайт элеңиз?\n'
-                             '1.Жаныбарларлы дарылоону\n'
-                             '2.Эсептөөлөрдү жүргүзүүнү',reply_markup=answer_markup)
-        await Test.Q11.set()  # Переход к третьему вопросу
+        await message.answer("Пожалуйста выберите вопрос!")
 
 
-@dp.message_handler(state=Test.Q11)
-async def answer_q11(message: types.Message, state: FSMContext):
+@dp.message_handler(state=Test.MENU)
+async def menu(message: types.Message, state: FSMContext):
     answer = message.text.strip()
-    if answer == 'тестти токтотуу':
-        await message.answer("Тест токтоду. Кайра отууго (/start) командасын жибериниз")
-        await state.finish()
-    else:
-        await state.update_data(q10=answer) # Сохранение ответа на второй вопрос
-        await message.answer('Эн жакшы! Он биринчи суроо:\nКайсы жумушту тандайт элеңиз?\n'
-                             '1.Өсүмдүктөрдүн жаңы сортторун өстүрүүнү\n'
-                             '2.Өнөр жай продукциясынын жаңы түрлөрүн долбоорлоо(автоунаа,кийим-кече,үй,тамак-аш)', reply_markup=answer_markup)
-        await Test.Q12.set()# Переход к четвертому вопросу
+    if answer == "ХОЧУ ЗАДАТЬ ВОПРОС":
+        await message.answer("Выберите вопрос который хотите задать?", reply_markup=submit_markup)
+        await Test.QUIZ.set()
+    elif answer == "НАЧАТЬ!":
+        await message.answer("Погрузись в мир - <FULLBODY>", reply_markup=an_markup)
+        await Test.Q2.set()
+    elif answer == "О НАС":
+        await message.answer("Погрузись в мир - <FULLBODY>", reply_markup=a_markup)
+        await Test.Q2.set()
+    elif answer == "ФУНКЦИИ БОТА":
+        await message.answer("ВЫБЕРИТЕ ФУНКЦИЮ", reply_markup=func_markup)
+        await Test.FUNC1.set()
 
 
-@dp.message_handler(state=Test.Q12)
-async def answer_q12(message: types.Message, state: FSMContext):
+@dp.message_handler(state=Test.FUNC1)
+async def answer_end(message: types.Message, state: FSMContext):
     answer = message.text.strip()
-    if answer == 'тестти токтотуу':
-        await message.answer("Тест токтоду. Кайра отууго (/start) командасын жибериниз")
+    if answer == "ЗАНЯТИЕ ВМЕСТЕ":
+        await message.answer("WEFUNC - Это функция бота с которой вы сможете сделать тренировки вместе.\n"
+                             "Пользы функции:\n"
+                             "\n"
+                             "-Экономит ваше время!\n"
+                             "-Подскажет когда делать отдых и как!\n"
+                             "-Напоминает о перерывах!\n"
+                             "-Удобно, просто!\n"
+                             "\n"
+                             "Оправляй команду что бы начать.", reply_markup=FUNC)
         await state.finish()
-    else:
-        await state.update_data(q11=answer) # Сохранение ответа на третий вопрос
-        await message.answer('Жакшы! Он экинчи суроо:\nКайсы жумушту тандайт элеңиз?\n'
-                         '1.Адамдарын ортосундагы талаш-тартыштарды,чыр-чатакты чечүү, ишендирүү, түшүндүрүү,дем берүү,жасалоону\n'
-                         '2.Чиймелерди,схемаларды, таблицаларды түшүнүү(түшүнүү,тактоо,иретке келтирүү)', reply_markup=answer_markup)
-        await Test.Q13.set() # Переход к пятому вопросу
+        register_handlers_extra(dp)
+    elif answer == "ПЛАН ПИТАНИЯ":
+        await message.answer("HEALFUNC - Это функция бота с которой вы сможете узнать сколько вам нужно есть и пить.\n"
+                             "Пользы функции:\n"
+                             "\n"
+                             "-Экономит ваше время!\n"
+                             "-Подскажет что есть, сколько есть!\n"
+                             "-Какие продукты вам нужно!\n"
+                             "-Удобно, просто!\n"
+                             "\n"
+                             "Оправляй команду что бы начать.", reply_markup=give)
+        await state.finish()
+        register_handlers_extra1(dp)
 
 
-@dp.message_handler(state=Test.Q13)
-async def answer_q13(message: types.Message, state: FSMContext):
+@dp.message_handler(state=Test.FUNC2)
+async def answer_end(message: types.Message, state: FSMContext):
     answer = message.text.strip()
-    if answer == 'тестти токтотуу':
-        await message.answer("Тест токтоду. Кайра отууго (/start) командасын жибериниз")
+    if answer == "ПЛАН ПИТАНИЯ":
+        await message.answer("HEALFUNC - Это функция бота с которой вы сможете узнать сколько вам нужно есть и пить.\n"
+                             "Пользы функции:\n"
+                             "\n"
+                             "-Экономит ваше время!\n"
+                             "-Подскажет что есть, сколько есть!\n"
+                             "-Какие продукты вам нужно!\n"
+                             "-Удобно, просто!\n"
+                             "\n"
+                             "Оправляй команду что бы начать.", reply_markup=give)
         await state.finish()
-    else:
-        await state.update_data(q12=answer) # Сохранение ответа на четвертый вопрос
-        await message.answer('Эн жакшы! Он учунчу суроо:\nКайсы жумушту тандайт элеңиз?\n'
-                         '1.Көркөм чыгармачылык кружокторунун иштерине байкоо жүргүзүүнү\n'
-                         '2.Микробдордун жашоосуна байкоо жүргүзүү, изилдөөнү', reply_markup=answer_markup)
-        await Test.Q14.set() # Переход к шестому вопросу
-
-
-@dp.message_handler(state=Test.Q14)
-async def answer_q14(message: types.Message, state: FSMContext):
-    answer = message.text.strip()
-    if answer == 'тестти токтотуу':
-        await message.answer("Тест токтоду. Кайра отууго (/start) командасын жибериниз")
-        await state.finish()
-    else:
-        await state.update_data(q13=answer) # Сохранение ответа на пятый вопрос
-        await message.answer('Эн соонун! Он тортунчу суроо:\nКайсы жумушту тандайт элеңиз?\n'
-                         '1.Медициналык жабдууларды жана приборлорду тейлөө жана оңдоону\n'
-                         '2.Жараат алган,көгөргөн,күйгөн жана башкалар болгон учурда адамдарга медициналык жардам көрсөтүүнү', reply_markup=answer_markup)
-        await Test.Q15.set() # Переход к седьмому вопросу
-
-
-@dp.message_handler(state=Test.Q15)
-async def answer_q15(message: types.Message, state: FSMContext):
-    answer = message.text.strip()
-    if answer == 'тестти токтотуу':
-        await message.answer("Тест токтоду. Кайра отууго (/start) командасын жибериниз")
-        await state.finish()
-    else:
-        await state.update_data(q14=answer) # Сохранение ответа на шестой вопрос
-        await message.answer('Жакшы! Он бешиинчи суроо:\nКайсы жумушту тандайт элеңиз?\n'
-                         '1.Байкалган кубулуштардын,окуялардын, өлчөнгөн объектилердин так сурөттөмөлөрүн(отчетторун) түзүүнү\n'
-                         '2.Көрүлгөн же чагылдырылган окуяларды көркөм сүрөттөө', reply_markup=answer_markup)
-        await Test.Q16.set()  # Переход к девятому вопросу
-
-
-@dp.message_handler(state=Test.Q16)
-async def answer_q16(message: types.Message, state: FSMContext):
-    answer = message.text.strip()
-    if answer == 'тестти токтотуу':
-        await message.answer("Тест токтоду. Кайра отууго (/start) командасын жибериниз")
-        await state.finish()
-    else:
-        await state.update_data(q15=answer) # Сохранение ответа на седьмой вопрос
-        await message.answer('Эн жакшы! Он алтынчы суроо:\nКайсы жумушту тандайт элеңиз?\n'
-                         '1.Ооруканада лабораториялык изилдөөлөрдү жүргүзүүнү\n'
-                         '2.Оорулууларды кабыл алуу,кароо,алар менен сүйлөшүү,дарылоону жазуу', reply_markup=answer_markup)
-        await Test.Q17.set() # Переход к девятому вопросу
-
-
-@dp.message_handler(state=Test.Q17)
-async def answer_q17(message: types.Message, state: FSMContext):
-    answer = message.text.strip()
-    if answer == 'тестти токтотуу':
-        await message.answer("Тест токтоду. Кайра отууго (/start) командасын жибериниз")
-        await state.finish()
-    else:
-        await state.update_data(q16=answer) # Сохранение ответа на восьмой вопрос
-        await message.answer('Абдан жакшы! Он жетиинчи суроо:\nКайсы жумушту тандайт элеңиз?\n'
-                         '1.Бөлмөлөрдүн дубалдарын, буюмдардын бетин сырдоону\n'
-                         '2.Имаратты монтаждоону же приборлорду монтаждоону жүргүзүү', reply_markup=answer_markup)
-        await Test.Q18.set() # Переход к десятому вопросу
-
-
-@dp.message_handler(state=Test.Q18)
-async def answer_q18(message: types.Message, state: FSMContext):
-    answer = message.text.strip()
-    if answer == 'тестти токтотуу':
-        await message.answer("Тест токтоду. Кайра отууго (/start) командасын жибериниз")
-        await state.finish()
-    else:
-        await state.update_data(q17=answer) # Сохранение ответа на шестой вопрос
-        await message.answer('Жакшы! Он сегизинчи суроо:\n Кайсы жумушту тандайт элеңиз?\n'
-                         '1.Курбуларынын же жаш курбуларынын театрларша,музейлерге, экскурсияларга, жөө саякаттарга жана башка маданий саякаттарын уюштурууну\n'
-                         '2.Сахнада ойноо,концерттерге катышууну', reply_markup=answer_markup)
-        await Test.Q19.set()  # Переход к девятому вопросу
-
-
-@dp.message_handler(state=Test.Q19)
-async def answer_q19(message: types.Message, state: FSMContext):
-    answer = message.text.strip()
-    if answer == 'тестти токтотуу':
-        await message.answer("Тест токтоду. Кайра отууго (/start) командасын жибериниз")
-        await state.finish()
-    else:
-        await state.update_data(q18=answer) # Сохранение ответа на седьмой вопрос
-        await message.answer('Эн жакшы! Он тогузунчу суроо:\nКайсы жумушту тандайт элеңиз?\n'
-                         '1.Чиймелеп боюнча буюмдун тетиктерин(автоунаа, кийим-кече)чыгаруу, имараттарды \n'
-                         '2.Сүрөт тартуу,карталарды көчүрүү', reply_markup=answer_markup)
-        await Test.Q20.set() # Переход к девятому вопросу
-
-
-@dp.message_handler(state=Test.Q20)
-async def answer_q20(message: types.Message, state: FSMContext):
-    answer = message.text.strip()
-    if answer == 'тестти токтотуу':
-        await message.answer("Тест токтоду. Кайра отууго (/start) командасын жибериниз")
-        await state.finish()
-    else:
-        await state.update_data(q19=answer) # Сохранение ответа на восьмой вопрос
-        await message.answer('Адбан жакшы! Жыйырманчы суроо:\nКайсы жумушту тандайт элеңиз?\n'
-                         '1.Өсүмдүктөрдүн илдеттерине,токой зыянкечтерине,бакчага каршы күрөшүүнү\n'
-                         '2.Клавиатура, машиналарды иштөө (машинка,телетайп ж.б)', reply_markup=answer_markup)
-        await Test.END.set() # Переход к десятому вопросу
-
+        register_handlers_extra1(dp)
 
 @dp.message_handler(state=Test.END)
 async def answer_end(message: types.Message, state: FSMContext):
     answer = message.text.strip()
-    if answer == 'тестти токтотуу':
-        await message.answer("Тест токтоду. Кайра отууго (/start) командасын жибериниз")
-        await state.finish()
-    else:
-        await state.update_data(q20=answer)
     data = await state.get_data()  # Получение всех ответов
     q1 = data.get('q1')
     q2 = data.get('q2')
@@ -348,156 +300,201 @@ async def answer_end(message: types.Message, state: FSMContext):
     q5 = data.get('q5')
     q6 = data.get('q6')
     q7 = data.get('q7')
-    q8 = data.get('q8')
-    q9 = data.get('q9')
-    q10 = data.get('q10')
-    q11 = data.get('q11')
-    q12 = data.get('q12')
-    q13 = data.get('q13')
-    q14 = data.get('q14')
-    q15 = data.get('q15')
-    q16 = data.get('q16')
-    q17 = data.get('q17')
-    q18 = data.get('q18')
-    q19 = data.get('q19')
-    q20 = data.get('q20')
-    if q1 == '2' and q2 == '2' and q3 == '1' and q4 == '1' and q5 == '1' and q6 == '2' and q7 == '2' and q8 == '2'\
-            and q9 == '1' and q10 == '2' and q11 == '2' and q12 == '2' and q13 == '1' and q14 == '1' and q15 == '1'\
-            and q16 == '2' and q17 == '2' and q18 == '1' and q19 == '1' and q20 == '2':
-        result = 'Адам-Техника'
-    elif q1 == '2' and q2 == '2' and q3 == '1' and q4 == '1' and q5 == '1' and q6 == '2' and q7 == '1' and q8 == '2' \
-            and q9 == '1' and q10 == '2' and q11 == '2' and q12 == '2' and q13 == '1' and q14 == '1' and q15 == '1' \
-            and q16 == '2' and q17 == '2' and q18 == '1' and q19 == '1' and q20 == '2':
-        result = 'Адам-Техника'
-    elif q1 == '2' and q2 == '2' and q3 == '1' and q4 == '1' and q5 == '1' and q6 == '1' and q7 == '1' and q8 == '2' \
-            and q9 == '1' and q10 == '2' and q11 == '2' and q12 == '2' and q13 == '1' and q14 == '1' and q15 == '1' \
-            and q16 == '2' and q17 == '2' and q18 == '1' and q19 == '1' and q20 == '2':
-        result = 'Адам-Техника'
-    elif q1 == '1' and q2 == '1' and q3 == '2' and q4 == '1' and q5 == '1' and q6 == '1' and q7 == '1' and q8 == '2'\
-            and q9 == '1' and q10 == '1' and q11 == '1' and q12 == '2' and q13 == '2' and q14 == '2' and q15 == '1'\
-            and q16 == '1' and q17 == '1' and q18 == '2' and q19 == '2' and q20 == '1':
-        result = 'Адам-Жаратылыш'
-    elif q1 == '1' and q2 == '1' and q3 == '1' and q4 == '1' and q5 == '1' and q6 == '1' and q7 == '1' and q8 == '2'\
-            and q9 == '1' and q10 == '1' and q11 == '1' and q12 == '2' and q13 == '2' and q14 == '2' and q15 == '1'\
-            and q16 == '1' and q17 == '1' and q18 == '2' and q19 == '2' and q20 == '1':
-        result = 'Адам-Жаратылыш'
-    elif q1 == '2' and q2 == '2' and q3 == '1' and q4 == '2' and q5 == '2' and q6 == '2' and q7 == '1' and q8 == '2'\
-            and q9 == '2' and q10 == '2' and q11 == '2' and q12 == '1' and q13 == '1' and q14 == '2' and q15 == '2'\
-            and q16 == '2' and q17 == '2' and q18 == '1' and q19 == '1' and q20 == '2':
-        result = 'Адам-корком образ'
-    elif q1 == '1' and q2 == '2' and q3 == '1' and q4 == '2' and q5 == '2' and q6 == '2' and q7 == '1' and q8 == '2'\
-            and q9 == '2' and q10 == '2' and q11 == '2' and q12 == '1' and q13 == '1' and q14 == '2' and q15 == '2'\
-            and q16 == '2' and q17 == '2' and q18 == '1' and q19 == '1' and q20 == '2':
-        result = 'Адам-корком образ'
-    elif q1 == '2' and q2 == '2' and q3 == '1' and q4 == '2' and q5 == '2' and q6 == '2' and q7 == '1' and q8 == '1'\
-            and q9 == '2' and q10 == '2' and q11 == '2' and q12 == '1' and q13 == '1' and q14 == '2' and q15 == '2'\
-            and q16 == '2' and q17 == '2' and q18 == '1' and q19 == '1' and q20 == '2':
-        result = 'Адам-корком образ'
-    elif q1 == '2' and q2 == '1' and q3 == '1' and q4 == '2' and q5 == '1' and q6 == '2' and q7 == '2' and q8 == '2'\
-            and q9 == '1' and q10 == '2' and q11 == '2' and q12 == '2' and q13 == '1' and q14 == '1' and q15 == '1'\
-            and q16 == '2' and q17 == '2' and q18 == '2' and q19 == '2' and q20 == '2':
-        result = 'Адам-адам'
-    elif q1 == '2' and q2 == '1' and q3 == '1' and q4 == '2' and q5 == '1' and q6 == '2' and q7 == '2' and q8 == '1'\
-            and q9 == '1' and q10 == '2' and q11 == '2' and q12 == '2' and q13 == '1' and q14 == '1' and q15 == '1'\
-            and q16 == '2' and q17 == '2' and q18 == '2' and q19 == '2' and q20 == '2':
-        result = 'Адам-адам'
-    elif q1 == '1' and q2 == '1' and q3 == '2' and q4 == '2' and q5 == '2' and q6 == '2' and q7 == '1' and q8 == '2'\
-            and q9 == '1' and q10 == '1' and q11 == '1' and q12 == '1' and q13 == '1' and q14 == '2' and q15 == '2'\
-            and q16 == '2' and q17 == '1' and q18 == '1' and q19 == '2' and q20 == '1':
-        result = 'Адам-системалык белги'
-    elif q1 == '1' and q2 == '1' and q3 == '2' and q4 == '2' and q5 == '2' and q6 == '2' and q7 == '2' and q8 == '2' \
-            and q9 == '1' and q10 == '1' and q11 == '1' and q12 == '1' and q13 == '1' and q14 == '2' and q15 == '2' \
-            and q16 == '2' and q17 == '1' and q18 == '1' and q19 == '2' and q20 == '1':
-        result = 'Адам-системалык белги'
-    elif q1 == '2' and q2 == '2' and q3 == '2' and q4 == '2' and q5 == '2' and q6 == '2' and q7 == '1' and q8 == '2' \
-            and q9 == '1' and q10 == '1' and q11 == '1' and q12 == '1' and q13 == '1' and q14 == '2' and q15 == '2' \
-            and q16 == '2' and q17 == '1' and q18 == '1' and q19 == '2' and q20 == '1':
-        result = 'Адам-системалык белги'
-    elif q1 == '1' and q2 == '2' and q3 == '2' and q4 == '2' and q5 == '2' and q6 == '2' and q7 == '1' and q8 == '2'\
-            and q9 == '1' and q10 == '1' and q11 == '1' and q12 == '1' and q13 == '1' and q14 == '2' and q15 == '2'\
-            and q16 == '2' and q17 == '1' and q18 == '1' and q19 == '2' and q20 == '1':
+    q4 = float(q4)
+    q5 = float(q5)
+    q3 = float(q3)
 
-        result = 'Адам-системалык белги'
+    q3 = "{:.2f}".format(q3 / 100)
+    q3 = float(q3)
+    bmi = q5 / (q3 ** 2)
+    bmi = round(bmi, 2)
+
+    if bmi < 18.5:
+            photo_path = "C:\\Users\\User\\Downloads\\Untitled (38).png"
+            with open(photo_path, 'rb') as photo:
+                await message.answer_photo(photo)
+                await message.answer(f"Ваш (ИМТ) Индекс Массы Тела низкий(МАССА ТЕЛА НИЗКАЯ):{bmi}\n"
+                                     f"ДЛЯ НАБОРА МАССЫ:\n"
+                                     f"\n"
+                                     f"Персональный совет: Снизьте активность(занимайтесь тренировками)\n"
+                                     f"\n"
+                                     f"Не утомляйтесь, не добивайте себя, следите за питанием ешьте больше.\n"
+                                     f"\n")
+                await message.answer("Обработка вашего запроса...")
+                delay_seconds = 5
+                await asyncio.sleep(delay_seconds)
+                await message.answer("Программа тренировок готова!")
+                delay_seconds = 4
+                await asyncio.sleep(delay_seconds)
+                photo_path = "C:\\Users\\User\\Downloads\\Untitled (46).png"
+                with open(photo_path, 'rb') as photo:
+                    await message.answer_photo(photo)
+                delay_seconds = 4
+                await asyncio.sleep(delay_seconds)
+                await message.answer("Обработка...")
+                delay_seconds = 4
+                await asyncio.sleep(delay_seconds)
+                video_path = "C:\\Users\\User\\Downloads\\НИЗ-ПН.MP4"
+                with open(video_path, 'rb') as video:
+                    await message.answer_video(video)
+                    await message.answer("ПОНЕДЕЛЬНИК ДЕНЬ-1")
+                    video_path = "C:\\Users\\User\\Downloads\\НИЗ-ВТ.MP4"
+                    with open(video_path, 'rb') as video:
+                        await message.answer_video(video)
+                        await message.answer("СРЕДА ДЕНЬ-2")
+                        video_path = "C:\\Users\\User\\Downloads\\НИЗ-ПТ.MP4"
+                        with open(video_path, 'rb') as video:
+                            await message.answer_video(video)
+                            await message.answer("ПЯТНИЦА ДЕНЬ-3")
+                    photo_path = "C:\\Users\\User\\Downloads\\ЧЕК ЛИСТ01.jpg"
+                    with open(photo_path, 'rb') as photo:
+                        await message.answer_photo(photo)
+                        await message.answer("Вы в меню выберите команду:",reply_markup=b_markup)
+                        await Test.MENU.set()
+
+    elif 18.5 <= bmi <= 24.9:
+        photo_path = "C:\\Users\\User\\Downloads\\Untitled (37).png"
+        with open(photo_path, 'rb') as photo:
+            await message.answer_photo(photo)
+            await message.answer(f"Ваш (ИМТ) Индекс Массы Тела в норме:{bmi}\n"
+                                                                      f"ДЛЯ НАБОРА МАССЫ:\n"
+                                 f"\n"
+
+                           f"Персональный совет: Снизьте активность(занимайтесь тренировками)\n"
+                           f"и не утомляйтесь, не добивайте себя, следите за питанием ешьте больше.\n"
+                           f"\n")
+            await message.answer("Обработка вашего запроса...")
+            delay_seconds = 5
+            await asyncio.sleep(delay_seconds)
+            await message.answer("Программа тренировок готова!")
+            delay_seconds = 4
+            await asyncio.sleep(delay_seconds)
+            photo_path = "C:\\Users\\User\\Downloads\\Untitled (46).png"
+            with open(photo_path, 'rb') as photo:
+                await message.answer_photo(photo)
+            delay_seconds = 2
+            await asyncio.sleep(delay_seconds)
+            await message.answer("Обработка...")
+            delay_seconds = 3
+            await asyncio.sleep(delay_seconds)
+            random_numbers = int(''.join(str(random.randint(1, 9)) for _ in range(10)))
+            video_path = "C:\\Users\\User\\Downloads\\НОРМ-ПН.MP4"
+            with open(video_path, 'rb') as video:
+                await message.answer_video(video)
+                await message.answer("ПОНЕДЕЛЬНИК ДЕНЬ-1")
+                video_path = "C:\\Users\\User\\Downloads\\НОРМ-СР.MP4"
+                with open(video_path, 'rb') as video:
+                    await message.answer_video(video)
+                    await message.answer("СРЕДА ДЕНЬ-2")
+                    video_path = "C:\\Users\\User\\Downloads\\НОРМ-ПТ.MP4"
+                    with open(video_path, 'rb') as video:
+                        await message.answer_video(video)
+                        await message.answer("ПЯТНИЦА ДЕНЬ-3")
+                photo_path = "C:\\Users\\User\\Downloads\\ЧЕК ЛИСТ01.jpg"
+                with open(photo_path, 'rb') as photo:
+                    await message.answer_photo(photo)
+                await message.answer("Вы в меню выберите команду:", reply_markup=b_markup)
+                await Test.MENU.set()
+
+    elif 24.9 <= bmi <= 29.5:
+        photo_path = "C:\\Users\\User\\Downloads\\Untitled (31).png"
+        with open(photo_path, 'rb') as photo:
+            await message.answer_photo(photo)
+            await message.answer(f"Ваш (ИМТ) Индекс Массы Тела в избытке (лишний вес){bmi}\n"
+                                                                      f"ДЛЯ НАБОРА МАССЫ И СНИЖЕНИЕ ЖИРОВ:\n"
+                                 f"\n"
+
+                                 f"Ваш персональный совет:Двигайтесь больше, не утомляйтесь, пейте больше воды,\n"
+                                 f"ограничьте жиры потребление сладкого и жиров")
+            await message.answer("Обработка вашего запроса...")
+            delay_seconds = 5
+            await asyncio.sleep(delay_seconds)
+            await message.answer("Программа тренировок готова!")
+            delay_seconds = 4
+            await asyncio.sleep(delay_seconds)
+
+            photo_path = "C:\\Users\\User\\Downloads\\Untitled (46).png"
+            with open(photo_path, 'rb') as photo:
+                await message.answer_photo(photo)
+            delay_seconds = 2
+            await asyncio.sleep(delay_seconds)
+            await message.answer("Обработка...")
+            delay_seconds = 3
+            await asyncio.sleep(delay_seconds)
+            random_numbers = int(''.join(str(random.randint(1, 9)) for _ in range(10)))
+            video_path = "C:\\Users\\User\\Downloads\\ИЗБ-ПН.MP4"
+            with open(video_path, 'rb') as video:
+                await message.answer_video(video)
+                await message.answer("ПОНЕДЕЛЬНИК ДЕНЬ-1")
+                video_path = "C:\\Users\\User\\Downloads\\ИЗБ-СР.MP4"
+                with open(video_path, 'rb') as video:
+                    await message.answer_video(video)
+                    await message.answer("СРЕДА ДЕНЬ-2")
+                    video_path = "C:\\Users\\User\\Downloads\\ИЗБ-ПТ.MP4"
+                    with open(video_path, 'rb') as video:
+                        await message.answer_video(video)
+                        await message.answer("ПЯТНИЦА ДЕНЬ-3")
+                photo_path = "C:\\Users\\User\\Downloads\\ЧЕК ЛИСТ01.jpg"
+                with open(photo_path, 'rb') as photo:
+                    await message.answer_photo(photo)
+                await message.answer("Вы в меню выберите команду:", reply_markup=b_markup)
+                await Test.MENU.set()
+
+    elif 29.5 <= bmi:
+        photo_path = "C:\\Users\\User\\Downloads\\Untitled (41).png"
+        with open(photo_path, 'rb') as photo:
+            await message.answer_photo(photo)
+            await message.answer(f"Ваш (ИМТ) Индекс Массы Тела в избытке слишком(лишний вес){bmi}\n"
+                                                                      f"ДЛЯ НАБОРА МАССЫ И СНИЖЕНИЕ ЖИРА:\n"
+                                 f"\n"
+
+                                 f"Ваш персональный совет: Двигайтесь больше, ходите больше ешьте больше,"
+                                 f" не утомляйтесь."
+                                 f"Так же занимайтесь под наблюдением тренеров и получите консультацию с врачами.")
+            await message.answer("Обработка вашего запроса...")
+            delay_seconds = 5
+            await asyncio.sleep(delay_seconds)
+            await message.answer("Программа тренировок готова!")
+            delay_seconds = 4
+            await asyncio.sleep(delay_seconds)
+
+            photo_path = "C:\\Users\\User\\Downloads\\Untitled (46).png"
+            with open(photo_path, 'rb') as photo:
+                await message.answer_photo(photo)
+            delay_seconds = 2
+            await asyncio.sleep(delay_seconds)
+            await message.answer("Обработка...")
+            delay_seconds = 3
+            await asyncio.sleep(delay_seconds)
+            random_numbers = int(''.join(str(random.randint(1, 9)) for _ in range(10)))
+            video_path = "C:\\Users\\User\\Downloads\\ОЧИЗБ-ПН01.MP4"
+            with open(video_path, 'rb') as video:
+                await message.answer_video(video)
+                await message.answer("ПОНЕДЕЛЬНИК ДЕНЬ-1")
+                video_path = "C:\\Users\\User\\Downloads\\ОЧИЗБ-СР.MP4"
+                with open(video_path, 'rb') as video:
+                    await message.answer_video(video)
+                    await message.answer("СРЕДА ДЕНЬ-2")
+                    video_path = "C:\\Users\\User\\Downloads\\ОЧИЗБ-ПТ.MP4"
+                    with open(video_path, 'rb') as video:
+                        await message.answer_video(video)
+                        await message.answer("ПЯТНИЦА ДЕНЬ-3")
+                photo_path = "C:\\Users\\User\\Downloads\\ЧЕК ЛИСТ.jpg"
+                with open(photo_path, 'rb') as photo:
+                    await message.answer_photo(photo)
+                await message.answer("Вы в меню выберите команду:", reply_markup=b_markup)
+                await Test.MENU.set()
+
     else:
-        result = 'Жыйынтыгыныз так чыкпай калды.Сураныч тестти кайрадан отунуз!\n' \
-                 'Кайрадан отууго (/start) командасын жибериниз.'
+        await message.answer('Не удалось обработать ваши данные.Пожалуйста пройдите заново и постарайтесь корректно '
+                             'ввести данные!\n''Что бы пройти заново отправьте команду {/start}')
         await state.finish()
 
-    await message.answer(f'Жоопторунузга рахмат! Сиздин жыйынтык:\n{result}')
 
-
-
-#     # получаем данные из состояния
-#     data = await state.get_data()
-#     # создаем словарь с ответами
-#     answers = {
-#         "Ответ на вопрос 1": data.get("answer_1"),
-#         "Ответ на вопрос 2": data.get("answer_2"),
-#         "Ответ на вопрос 3": data.get("answer_3"),
-#         "Ответ на вопрос 4": data.get("answer_4"),
-#         "Ответ на вопрос 5": data.get("answer_5"),
-#         "Ответ на вопрос 6": data.get("answer_6"),
-#         "Ответ на вопрос 7": data.get("answer_7"),
-#         "Ответ на вопрос 8": data.get("answer_8"),
-#         "Ответ на вопрос 9": data.get("answer_9"),
-#         "Ответ на вопрос 10": data.get("answer_10")
-#     }
-
-#     correct_answers = ['Python', '2003', 'Elon Musk', 'SQL', '1990', 'Кит', 'Bill Gates', 'Swift', 'Объектно-ориентированное программирование', 'Python']
-#     # проверяем ответы и делаем выводы
-#     if answers["Ответ на вопрос 1"] == correct_answers[0] and answers["Ответ на вопрос 2"] == correct_answers[1] and answers["Ответ на вопрос 3"] == correct_answers[2]:
-#         await message.answer("Вы ответили правильно на первые три вопроса!")
-#     elif answers["Ответ на вопрос 4"] == correct_answers[3] and answers["Ответ на вопрос 5"] == correct_answers[4] and answers["Ответ на вопрос 6"] == correct_answers[5]:
-#         await message.answer("Вы ответили правильно на вопросы 4, 5 и 6!")
-#     elif answers["Ответ на вопрос 7"] == correct_answers[6] and answers["Ответ на вопрос 8"] == correct_answers[7] and answers["Ответ на вопрос 9"] == correct_answers[8]:
-#         await message.answer("Вы ответили правильно на вопросы 7, 8 и 9!")
-#     elif answers["Ответ на вопрос 10"] == correct_answers[9]:
-#         await message.answer("Поздравляем, вы ответили правильно на все вопросы!")
-#     else:
-#         await message.answer("К сожалению, вы не ответили правильно на все вопросы. Попробуйте еще раз!")
-#     # сбрасываем состояние
-#     await state.finish()
-
-# @dp.message_handler(state=Questions.question_10)
-# async def process_answer_10(message: types.Message, state: FSMContext):
-#     await state.update_data(answer_10=message.text)
-#     data = await state.get_data()
-#     correct_answers1 = ["Python", "2003", "Elon Musk", "SQL", "1990", "Кит", "Bill Gates", "Swift", "Функциональное программирование"]
-#     answers = {
-#             "Ответ на вопрос 1": data.get("answer_1"),
-#             "Ответ на вопрос 2": data.get("answer_2"),
-#             "Ответ на вопрос 3": data.get("answer_3"),
-#             "Ответ на вопрос 4": data.get("answer_4"),
-#             "Ответ на вопрос 5": data.get("answer_5"),
-#             "Ответ на вопрос 6": data.get("answer_6"),
-#             "Ответ на вопрос 7": data.get("answer_7"),
-#             "Ответ на вопрос 8": data.get("answer_8"),
-#             "Ответ на вопрос 9": data.get("answer_9"),
-#             "Ответ на вопрос 10": data.get("answer_10")
-#         }
-#     if data[answer_1] == "Python":
-#         await message.answer("Вы ответили правильно на первые три вопроса!")
-#     else:
-#         await message.answer("Успешно")
-        # elif answers["Ответ на вопрос 4"] == correct_answers[3] and answers["Ответ на вопрос 5"] == correct_answers[
-        #     4] and answers["Ответ на вопрос 6"] == correct_answers[5]:
-        #     await message.answer("Вы ответили правильно на вопросы 4, 5 и 6!")
-        # elif answers["Ответ на вопрос 7"] == correct_answers[6] and answers["Ответ на вопрос 8"] == correct_answers[
-        #     7] and answers["Ответ на вопрос 9"] == correct_answers[8]:
-        #     await message.answer("Вы ответили правильно на вопросы 7, 8 и 9!")
-        # elif answers["Ответ на вопрос 10"] == correct_answers[9]:
-        #     await message.answer("Поздравляем, вы ответили правильно на все вопросы!")
-        # else:
-        #     await message.answer("К сожалению, вы не ответили правильно на все вопросы. Попробуйте еще раз!")
-        # # сбрасываем состояние
-        # await state.finish()
- # and answers["Ответ на вопрос 2"] == correct_answers1[1] and \
-            # answers["Ответ на вопрос 3"] == correct_answers1[2] and answers["Ответ на вопрос 4"] == correct_answers1[3]\
-            # and answers["Ответ на вопрос 5"] == correct_answers1[4] and answers["Ответ на вопрос 6"] == \
-            # correct_answers1[5] and answers["Ответ на вопрос 7"] == correct_answers1[6] and \
-            # answers["Ответ на вопрос 8"] == correct_answers1[7] and answers["Ответ на вопрос 9"] == correct_answers1[8]:
-
-if __name__ == "__main__":
-    logging.basicConfig(level=logging.INFO)
+if __name__ == '__main__':
+    from aiogram import executor
     executor.start_polling(dp, skip_updates=True)
+
+
+
 
