@@ -93,7 +93,8 @@ async def start_workout(message: types.Message, training_duration: int, exercise
 async def end(message: types.Message, state: FSMContext):
     answer = message.text.strip()
     if answer == "ЗАВЕРШИТЬ":
-        await message.answer("Тренировка завершена! Что бы вернуться в начало введи комнду (/start)")
+        await message.answer("Тренировка завершена! Что бы вернуться в начало введи команду \n"
+                             "(/start)")
         await state.finish()
     elif answer == "НАЧАТЬ С НАЧАЛА":
         await message.answer("Что бы начать с начала введи команду (/wefunc)")

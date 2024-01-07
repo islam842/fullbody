@@ -9,6 +9,7 @@ from handlers.functwo import register_handlers_extra  # Импортируем �
 from handlers.funcone import register_handlers_extra1  # Импортируем функции из вашего файла handlers
 from aiogram import types
 from aiogram.dispatcher.filters import Command
+from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 
 logging.basicConfig(level=logging.INFO)
 register_handlers_extra1(dp)
@@ -31,7 +32,6 @@ class Test(StatesGroup):
     FUNC2 = State()
     MENU = State()
     QUIZ = State()
-
 
 
 @dp.message_handler(commands=['start'])
@@ -396,7 +396,7 @@ async def answer_end(message: types.Message, state: FSMContext):
                 await message.answer("Вы в меню выберите команду:", reply_markup=b_markup)
                 await Test.MENU.set()
 
-    elif 24.9 <= bmi <= 29.5:
+    elif 24.9 <= bmi <= 30:
         photo_path = "C:\\Users\\User\\Downloads\\Untitled (31).png"
         with open(photo_path, 'rb') as photo:
             await message.answer_photo(photo)
@@ -440,7 +440,7 @@ async def answer_end(message: types.Message, state: FSMContext):
                 await message.answer("Вы в меню выберите команду:", reply_markup=b_markup)
                 await Test.MENU.set()
 
-    elif 29.5 <= bmi:
+    elif 30 <= bmi:
         photo_path = "C:\\Users\\User\\Downloads\\Untitled (41).png"
         with open(photo_path, 'rb') as photo:
             await message.answer_photo(photo)
