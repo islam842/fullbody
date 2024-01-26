@@ -119,7 +119,10 @@ func_markup = ReplyKeyboardMarkup(
 
 ).add(
     KeyboardButton("ЗАНЯТИЕ ВМЕСТЕ"),
-    KeyboardButton("ПЛАН ПИТАНИЯ")
+    KeyboardButton("ПЛАН ПИТАНИЯ"),
+    KeyboardButton("ПРАВИЛЬНАЯ ТЕХНИКА УПРАЖНЕНИЙ")
+
+
 )
 
 FUNC = ReplyKeyboardMarkup(
@@ -183,5 +186,43 @@ gived = ReplyKeyboardMarkup(
 
 ).add(
     KeyboardButton("ПОЛУЧИТЬ")
+
+)
+
+
+kbfuncthree = ReplyKeyboardMarkup(
+    resize_keyboard=True,
+    one_time_keyboard=True
+
+
+).add(
+    KeyboardButton("Как делать жим лёжа?"),
+    KeyboardButton("Как делать отжимания?"),
+    KeyboardButton("Как делать приседания со штангой?"),
+    KeyboardButton("Как делать французкий жим?"),
+    KeyboardButton("Как делать подтягивание?"),
+    KeyboardButton("Как делать брусья?"),
+    KeyboardButton("ЗАВЕРШИТЬ"),
+
+
+)
+
+givetrue = ReplyKeyboardMarkup(
+    resize_keyboard=True,
+    one_time_keyboard=True
+
+
+).add(
+    KeyboardButton("/truefunc"),
+
+)
+
+instruc = ReplyKeyboardMarkup(
+    resize_keyboard=True,
+    one_time_keyboard=True
+
+
+).add(
+    KeyboardButton("ПОЛУЧИТЬ ИНСТРУКЦИЮ")
 
 )

@@ -2,17 +2,20 @@ from config import dp, bot
 from aiogram.dispatcher import FSMContext
 from aiogram.dispatcher.filters.state import State, StatesGroup
 import logging
-from Keyboards.client_kb import answer_markup, give, ans_markup, submit_markup, cancel_markup, active_markup, mot_markup, an_markup, a_markup, b_markup, FUNC, func_markup
+from Keyboards.client_kb import answer_markup, give, ans_markup, instruc, submit_markup, givetrue, cancel_markup, active_markup, mot_markup, an_markup, a_markup, b_markup, FUNC, func_markup
 import asyncio
 import random
 from handlers.functwo import register_handlers_extra  # Импортируем функции из вашего файла handlers
 from handlers.funcone import register_handlers_extra1  # Импортируем функции из вашего файла handlers
+from handlers.functhree import register_handlers_extraa  # Импортируем функции из вашего файла handlers
+
 from aiogram import types
 from aiogram.dispatcher.filters import Command
 from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 
 logging.basicConfig(level=logging.INFO)
 register_handlers_extra1(dp)
+register_handlers_extraa(dp)
 
 
 class Test(StatesGroup):
@@ -32,6 +35,7 @@ class Test(StatesGroup):
     FUNC2 = State()
     MENU = State()
     QUIZ = State()
+    ENDFUNC = State()
 
 
 @dp.message_handler(commands=['start'])
@@ -40,11 +44,19 @@ async def answer_q1(message: types.Message, state: FSMContext):
     photo_path = "C:\\Users\\User\\Downloads\\Untitled 50.png"
     with open(photo_path, 'rb') as photo:
         await message.answer_photo(photo)
-    await message.answer('Добро пожаловать в уникального Телеграмм бота для тренировок и набора массы!\n'
+    await message.answer('Добро пожаловать в уникальный Телеграмм бот для тренировок и набора массы!\n'
+                         'FULLBODY - Ваш персональный тренер!'
                          '\n'
-                         'Наш бот адаптируется к вашим потребностям, учитывая ваше тело, вес, рост и процент жира.\n'
+                         'Наш бот адаптируется к вашим потребностям, учитывая ваше:\n'
+                         '\n'
+                         '-Тело\n'
+                         '-Вес\n'
+                         '-Рост\n'
+                         '-Поцент жира\n'
+                         '-Ваш ИМТ\n'
+                         '\n'
                          'Получайте персональные планы тренировок на ближайшую неделю, а также возможность выполнять '
-                         'упражнения вместе с ботом.\n'
+                         'упражнения вместе с ботом с правильной техникой и получить консультацию о питании.\n'
                          '\n'
                          'Наша главная задача - помочь вам достичь ваших целей. Готовы начать?', reply_markup=ans_markup)
     await Test.Q2.set()  # Переход ко второму вопросу
@@ -64,10 +76,13 @@ async def answer_q2(message: types.Message, state: FSMContext):
         await message.answer("Добро пожаловать в мир FULLBODY! Мы - стартап-проект, созданный с любовью к здоровью "
                              "и фитнесу. \n"
                              "\n"
-                             "Наша цель - помочь вам достичь своих тренировочных целей и набрать массу. \n"
+                             "Наша цель - помочь вам достичь своих тренировочных целей и набрать массу.\n"
+                             "\n"
                              "С нашей помощью вы сможете улучшить свою физическую форму и достичь лучших "
                              "результатов. \n"
                              "Давайте вместе преобразим ваше тело и жизнь!\n"
+                             "\n"
+                             "С помощью наших функций вы практически получите личного тренера!\n"
                              "\n"
                              "Телеграмм канал проекта - https://t.me/fullbodyproject\n"
                              "ТикТок аккаунт проекта - \n"
@@ -271,6 +286,18 @@ async def answer_end(message: types.Message, state: FSMContext):
                              "Оправляй команду что бы начать.", reply_markup=give)
         await state.finish()
         register_handlers_extra1(dp)
+    elif answer == "ПРАВИЛЬНАЯ ТЕХНИКА УПРАЖНЕНИЙ":
+        await message.answer("TRUEFUNC - Это функция бота с которой вы сможете научиться правильно делать упражнение с техникой.\n"
+                             "Пользы функции:\n"
+                             "\n"
+                             "-Экономит ваше время!\n"
+                             "-Подскажет что и как правильно!\n"
+                             "-Спасет от травм!\n"
+                             "-Удобно, просто!\n"
+                             "\n"
+                             "Оправляй команду что бы начать.", reply_markup=givetrue)
+        await state.finish()
+        register_handlers_extraa(dp)
 
 
 @dp.message_handler(state=Test.FUNC2)
@@ -288,6 +315,7 @@ async def answer_end(message: types.Message, state: FSMContext):
                              "Оправляй команду что бы начать.", reply_markup=give)
         await state.finish()
         register_handlers_extra1(dp)
+
 
 @dp.message_handler(state=Test.END)
 async def answer_end(message: types.Message, state: FSMContext):
@@ -349,8 +377,10 @@ async def answer_end(message: types.Message, state: FSMContext):
                     photo_path = "C:\\Users\\User\\Downloads\\ЧЕК ЛИСТ01.jpg"
                     with open(photo_path, 'rb') as photo:
                         await message.answer_photo(photo)
-                        await message.answer("Вы в меню выберите команду:",reply_markup=b_markup)
-                        await Test.MENU.set()
+                        await message.answer("Получить дальнейшие инструкции?", reply_markup=instruc)
+                        await Test.ENDFUNC.set()
+
+
 
     elif 18.5 <= bmi <= 24.9:
         photo_path = "C:\\Users\\User\\Downloads\\Untitled (37).png"
@@ -393,8 +423,8 @@ async def answer_end(message: types.Message, state: FSMContext):
                 photo_path = "C:\\Users\\User\\Downloads\\ЧЕК ЛИСТ01.jpg"
                 with open(photo_path, 'rb') as photo:
                     await message.answer_photo(photo)
-                await message.answer("Вы в меню выберите команду:", reply_markup=b_markup)
-                await Test.MENU.set()
+                    await message.answer("Получить дальнейшие инструкции?", reply_markup=instruc)
+                    await Test.ENDFUNC.set()
 
     elif 24.9 <= bmi <= 30:
         photo_path = "C:\\Users\\User\\Downloads\\Untitled (31).png"
@@ -437,8 +467,8 @@ async def answer_end(message: types.Message, state: FSMContext):
                 photo_path = "C:\\Users\\User\\Downloads\\ЧЕК ЛИСТ01.jpg"
                 with open(photo_path, 'rb') as photo:
                     await message.answer_photo(photo)
-                await message.answer("Вы в меню выберите команду:", reply_markup=b_markup)
-                await Test.MENU.set()
+                    await message.answer("Получить дальнейшие инструкции?", reply_markup=instruc)
+                    await Test.ENDFUNC.set()
 
     elif 30 <= bmi:
         photo_path = "C:\\Users\\User\\Downloads\\Untitled (41).png"
@@ -482,14 +512,35 @@ async def answer_end(message: types.Message, state: FSMContext):
                 photo_path = "C:\\Users\\User\\Downloads\\ЧЕК ЛИСТ.jpg"
                 with open(photo_path, 'rb') as photo:
                     await message.answer_photo(photo)
-                await message.answer("Вы в меню выберите команду:", reply_markup=b_markup)
-                await Test.MENU.set()
-
+                    await message.answer("Получить дальнейшие инструкции?", reply_markup=instruc)
+                    await Test.ENDFUNC.set()
     else:
         await message.answer('Не удалось обработать ваши данные.Пожалуйста пройдите заново и постарайтесь корректно '
                              'ввести данные!\n''Что бы пройти заново отправьте команду {/start}')
         await state.finish()
 
+
+@dp.message_handler(state=Test.ENDFUNC)
+async def answer_end(message: types.Message, state: FSMContext):
+    answer = message.text.strip()
+    if answer == "ПОЛУЧИТЬ ИНСТРУКЦИЮ":
+        await message.answer("После полной недели тренировок.\n"
+                             "\n"
+                             "-Проанализируйте свой прогресс\n"
+                             "-Учтите недостатки в программе\n"
+                             "-Найдите более подходящий подход к тренировкам\n"
+                             "\n"
+                             "ЧТО НУЖНО ДЕЛАТЬ ДАЛЬШЕ?\n"
+                             "1.Усовершенствуйте план тренировок с помощью самоанализа.\n"
+                             "2.Вычитайте и добавляйте упражнение.\n"
+                             "\n"
+                             "ОЖИДАЙТЕ ОБРАТНОЙ СВЯЗИ ОТ НАС!\n"
+                             "\n"
+                             "ВНИМАНИЕ! Мы не можем вам дать самые точные советы и планы тренировок так как у нас недостаточно "
+                             "информаций о вашей здоровьи и уникальных отличий и по этому просим вас самоанализировать "
+                             "ваши действия. С уважением команда - [FULLBODY]")
+        await message.answer("Вы в меню выберите команду:", reply_markup=b_markup)
+        await Test.MENU.set()
 
 if __name__ == '__main__':
     from aiogram import executor

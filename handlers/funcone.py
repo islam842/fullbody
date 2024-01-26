@@ -22,7 +22,7 @@ async def start(message: types.Message):
 async def set_training_duration(message: types.Message, state: FSMContext):
     training_duration = message.text
     await state.update_data(training_duration=training_duration)
-    await message.answer("Укажите свой вес:")
+    await message.answer("Укажите свой вес(kg):")
     await TrainingStates.SET_EXERCISE_DURATION.set()
 
 

@@ -1,8 +1,9 @@
-from config import dp, bot
+from config import dp, bot, Dispatcher
 from aiogram.dispatcher import FSMContext
 from aiogram.dispatcher.filters.state import State, StatesGroup
 import logging
 from aiogram import types
+from Keyboards.client_kb import kbfuncthree
 
 
 class Quiz(StatesGroup):
@@ -10,8 +11,8 @@ class Quiz(StatesGroup):
 
 
 async def start(message: types.Message):
-    await message.answer("Привет, укажи ИМТ (индекс массы тела) \n"
-                         "Который указал вам бот при получение программы тренировок.", reply_markup=healfunc)
+    await message.answer("Привет, функция TRUEFUNC - отличный помошник и спасатель от травм.\n"
+                         "Какое упражнение тебе нужно? ", reply_markup=kbfuncthree)
     await Quiz.QUIZA.set()
 
 
@@ -29,15 +30,103 @@ async def answer_quiz(message: types.Message, state: FSMContext):
                              "4.Возьмите гриф штанги чуть шире ширины плеч.\n"
                              "Руки должны быть прямыми и вертикальными относительно пола.\n"
                              "\n"
-                             "Как показано ниже:")
-
+                             "Как показано ниже:", reply_markup=kbfuncthree)
+        video_path = "C:\\Users\\User\\Downloads\\ЖИМ ЛЕЖА ПРАВИЛЬНОЕ.mp4"
+        with open(video_path, 'rb') as video:
+            await message.answer_video(video)
+    elif answer == "Как делать приседания со штангой?":
+        await message.answer(
+            "1.Станьте прямо, разведите ноги на ширину плеч или чуть шире.Спина должна быть прямой, а грудь поднятой. Плечи отброшены назад.\n"
+            "\n"
+            "2.Положите штангу на верхнюю часть спины (верхний трапециевидный мышцы)\n"
+            "\n"
+            "3.Возьмите штангу широким захватом, руки должны быть расположены чуть шире плеч.\n"
+            "Начните движение, сгибая колени и опуская бедра книзу, как если бы вы садились на стул.\n"
+            "\n"
+            "4.Поднимитесь обратно вверх, выпрямляя ноги и возвращаясь в исходное положение.\n"
+            "Сосредотачивайтесь на том, чтобы использовать силу ног для подъема, а не наклоняться вперед..\n"
+            "\n"
+            "Как показано ниже:", reply_markup=kbfuncthree)
+        photo_path = "C:\\Users\\User\\Downloads\\ПРАВИЛЬНО ПРИСЕДАНЯИ ФИНАЛ.png"
+        with open(photo_path, 'rb') as photo:
+            await message.answer_photo(photo)
     elif answer == "Как делать отжимания?":
-        await message.answer("",reply_markup=submit_markup)
-    elif answer == "Как делать присед?":
-        await message.answer("",reply_markup=submit_markup)
-    elif answer == "":
-        await message.answer("",reply_markup=submit_markup)
-    elif answer == "Чем полезен проект?":
-        await message.answer("", reply_markup=submit_markup)
-    elif answer == "МЕНЮ":
-        await message.answer("Вы в меню, выберите команду.", reply_markup=b_markup)
+        await message.answer("Отжимания - это отличное упражнение для тренировки верхней части тела\n"
+                             "в основном грудных, плечевых и трiceps мышц.\n"
+                             "\n"
+                             "1.Лягте на пол, поддерживая тело на ладонях и носках ног.\n"
+                             "Расположите ладони чуть шире широких плеч.\n"
+                             "\n"
+                             "2.Смотрите вперед, не опуская голову, чтобы сохранить прямую позу шеи.\n"
+                             "Снизьте тело к полу, сгибая руки в локтях.\n"
+                             "\n"
+                             "3.Углы в локтях должны быть примерно 90 градусов.\n"
+                             "Не допускайте, чтобы локти уходили слишком широко в стороны.\n"
+                             "\n"
+                             "4.На выдохе поднимайте тело обратно в исходное положение, используя грудные и рулевые мышцы.\n"
+                             "Следите за тем, чтобы тело двигалось как одно целое.\n"
+                             "\n"
+                             "Как показано ниже:", reply_markup=kbfuncthree)
+        photo_path = "C:\\Users\\User\\Downloads\\КАК.jpg"
+        with open(photo_path, 'rb') as photo:
+            await message.answer_photo(photo)
+    elif answer == "Как делать французкий жим?":
+        await message.answer("Французский жим (Tricep French Press) - это упражнение, направленное на тренировку трiceps.\n"
+                             "Вот краткое руководство по его выполнению:\n"
+                             "\n"
+                             "1.Лягте на горизонтальную скамью или на пол.\n"
+                             "Возьмите гантели или штангу в вертикальное положение с прямыми руками,\n"
+                             "так чтобы ладони смотрели вперед.\n"
+                             "\n"
+                             "2.Медленно согните руки в локтях, опуская вес за голову.\n"
+                             "Локти должны оставаться неподвижными и направленными вверх.\n"
+                             "\n"
+                             "3.Опустите вес до тех пор, пока нижний конец гантелей или штанги не достигнет уровня головы.\n"
+                             "\n"
+                             "4.Силой трiceps поднимите вес обратно в исходное положение, возвращаясь к вертикальному положению рук.\n"
+                             "\n"
+                             "Как показано ниже:", reply_markup=kbfuncthree)
+        photo_path = "C:\\Users\\User\\Downloads\\ФРАНЦЗ ЖИМ ФИНАЛЛ.png"
+        with open(photo_path, 'rb') as photo:
+            await message.answer_photo(photo)
+    elif answer == "Как делать подтягивание?":
+        await message.answer("1.Руки расположите шире, чем ширина плеч."
+                             "Постепенное натяжение: Начните медленно и постепенно увеличивайте натяжение.\n"
+                             "\n"
+                             "2.Хват может быть широким (руки расположены за пределами ширины плеч),\n"
+                             "средним (руки на ширине плеч) или узким (руки вместе)..\n"
+                             "\n"
+                             "3.Примите глубокий вдох перед началом подтягивания.\n"
+                             "\n"
+                             "4.Начните медленно тянуться вверх, направляя грудь к турнику.\n"
+                             "\n"
+                             "5.Медленно опускайтесь вниз, контролируя движение. Избегайте рывков и падений.\n"
+                             "\n"
+                             "Как показано ниже:", reply_markup=kbfuncthree)
+        photo_path = "C:\\Users\\User\\Downloads\\ПРАВ ПОДТЯГИВАНИЕ.png"
+        with open(photo_path, 'rb') as photo:
+            await message.answer_photo(photo)
+    elif answer == "Как делать брусья?":
+        await message.answer("1.Поставьте руки на брусья, ладони внизу, направлены вперед.\n"
+                             "\n"
+                             "2.Поднимите тело, держа руки прямыми, а локти слегка согнутыми.\n"
+                             "Тело должно быть вертикальным, а ноги выпрямленными. Это ваша начальная поза.\n"
+                             "\n"
+                             "3.На вдохе медленно сгибайте локти, опуская тело вниз.\n"
+                             "\n"
+                             "4.На выдохе начинайте подниматься, выпрямляя руки.\n"
+                             "Контролируйте движение вверх и вниз, избегая рывков и контролируя силу мышц.\n"
+                             "\n"
+                             "Как показано ниже:", reply_markup=kbfuncthree)
+        photo_path = "C:\\Users\\User\\Downloads\\прав брусиии.png"
+        with open(photo_path, 'rb') as photo:
+            await message.answer_photo(photo)
+    elif answer == "ЗАВЕРШИТЬ":
+        await message.answer("Отправляй команду (/start) что бы начать сначала.")
+        await state.finish()
+    else:
+        await message.answer("Пожалуйста задайте вопрос.")
+
+
+def register_handlers_extraa(dp: Dispatcher):
+    dp.register_message_handler(start, commands=["truefunc"])
