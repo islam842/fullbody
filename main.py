@@ -1,4 +1,4 @@
-from config import dp, bot
+from config import dp
 from aiogram.dispatcher import FSMContext
 from aiogram.dispatcher.filters.state import State, StatesGroup
 import logging
@@ -8,7 +8,6 @@ import random
 from handlers.functwo import register_handlers_extra  # Импортируем функции из вашего файла handlers
 from handlers.funcone import register_handlers_extra1  # Импортируем функции из вашего файла handlers
 from handlers.functhree import register_handlers_extraa  # Импортируем функции из вашего файла handlers
-
 from aiogram import types
 from aiogram.dispatcher.filters import Command
 from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton
@@ -66,6 +65,12 @@ async def answer_q1(message: types.Message, state: FSMContext):
 async def answer_q2(message: types.Message, state: FSMContext):
     answer = message.text.strip()
     if answer == 'НАЧАТЬ!':
+        await message.answer("Подпишитесь на наши каналы:\n"
+                             "\n"
+                             "Официальный телеграм канал - https://t.me/fullbodyproject \n"
+                             "Официальный инстаграм аккаунт - https://www.instagram.com/fullbody_project?igsh=NTVldTJ0YmkxZzg3&utm_source=qr\n")
+        delay_seconds = 8
+        await asyncio.sleep(delay_seconds)
         await message.answer("Как вас зовут?")
         await Test.Q3.set()  # Переход к третьему вопросу
     elif answer == "О НАС":
