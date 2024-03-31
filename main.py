@@ -373,8 +373,7 @@ async def answer_end(message: types.Message, state: FSMContext):
                         with open('НИЗ-ПТ1.MP4', 'rb') as video:
                             await message.answer_video(video)
                             await message.answer("ПЯТНИЦА ДЕНЬ-3")
-                    photo_path = "C:\\Users\\User\\Downloads\\ЧЕК ЛИСТ01.jpg"
-                    with open(photo_path, 'rb') as photo:
+                    with open('ЧЕК ЛИСТ01.jpg', 'rb') as photo:
                         await message.answer_photo(photo)
                         await message.answer("Получить дальнейшие инструкции?", reply_markup=instruc)
                         await Test.ENDFUNC.set()
@@ -382,8 +381,7 @@ async def answer_end(message: types.Message, state: FSMContext):
 
 
     elif 18.5 <= bmi <= 24.9:
-        photo_path = "C:\\Users\\User\\Downloads\\Untitled (37).png"
-        with open(photo_path, 'rb') as photo:
+        with open('Untitled (37).png', 'rb') as photo:
             await message.answer_photo(photo)
             await message.answer(f"Ваш (ИМТ) Индекс Массы Тела в норме:{bmi}\n"
                                                                       f"ДЛЯ НАБОРА МАССЫ:\n"
@@ -398,8 +396,7 @@ async def answer_end(message: types.Message, state: FSMContext):
             await message.answer("Программа тренировок готова!")
             delay_seconds = 4
             await asyncio.sleep(delay_seconds)
-            photo_path = "C:\\Users\\User\\Downloads\\Untitled (46).png"
-            with open(photo_path, 'rb') as photo:
+            with open('Untitled (46).png', 'rb') as photo:
                 await message.answer_photo(photo)
             delay_seconds = 2
             await asyncio.sleep(delay_seconds)
@@ -407,27 +404,22 @@ async def answer_end(message: types.Message, state: FSMContext):
             delay_seconds = 3
             await asyncio.sleep(delay_seconds)
             random_numbers = int(''.join(str(random.randint(1, 9)) for _ in range(10)))
-            video_path = "C:\\Users\\User\\Downloads\\НОРМ-ПН.MP4"
-            with open(video_path, 'rb') as video:
+            with open('НОРМ-ПН1.MP4', 'rb') as video:
                 await message.answer_video(video)
                 await message.answer("ПОНЕДЕЛЬНИК ДЕНЬ-1")
-                video_path = "C:\\Users\\User\\Downloads\\НОРМ-СР.MP4"
-                with open(video_path, 'rb') as video:
+                with open('НОРМ-СР1.MP4', 'rb') as video:
                     await message.answer_video(video)
                     await message.answer("СРЕДА ДЕНЬ-2")
-                    video_path = "C:\\Users\\User\\Downloads\\НОРМ-ПТ.MP4"
-                    with open(video_path, 'rb') as video:
+                    with open('НОРМ-ПТ.MP4', 'rb') as video:
                         await message.answer_video(video)
                         await message.answer("ПЯТНИЦА ДЕНЬ-3")
-                photo_path = "C:\\Users\\User\\Downloads\\ЧЕК ЛИСТ01.jpg"
-                with open(photo_path, 'rb') as photo:
+                with open('ЧЕК ЛИСТ01.jpg', 'rb') as photo:
                     await message.answer_photo(photo)
                     await message.answer("Получить дальнейшие инструкции?", reply_markup=instruc)
                     await Test.ENDFUNC.set()
 
     elif 24.9 <= bmi <= 30:
-        photo_path = "C:\\Users\\User\\Downloads\\Untitled (31).png"
-        with open(photo_path, 'rb') as photo:
+        with open('Untitled (31).png', 'rb') as photo:
             await message.answer_photo(photo)
             await message.answer(f"Ваш (ИМТ) Индекс Массы Тела в избытке (лишний вес){bmi}\n"
                                                                       f"ДЛЯ НАБОРА МАССЫ И СНИЖЕНИЕ ЖИРОВ:\n"
@@ -442,8 +434,7 @@ async def answer_end(message: types.Message, state: FSMContext):
             delay_seconds = 4
             await asyncio.sleep(delay_seconds)
 
-            photo_path = "C:\\Users\\User\\Downloads\\Untitled (46).png"
-            with open(photo_path, 'rb') as photo:
+            with open('Untitled (46).png', 'rb') as photo:
                 await message.answer_photo(photo)
             delay_seconds = 2
             await asyncio.sleep(delay_seconds)
@@ -451,27 +442,22 @@ async def answer_end(message: types.Message, state: FSMContext):
             delay_seconds = 3
             await asyncio.sleep(delay_seconds)
             random_numbers = int(''.join(str(random.randint(1, 9)) for _ in range(10)))
-            video_path = "C:\\Users\\User\\Downloads\\ИЗБ-ПН.MP4"
-            with open(video_path, 'rb') as video:
+            with open('ИЗБ-ПН.MP4', 'rb') as video:
                 await message.answer_video(video)
                 await message.answer("ПОНЕДЕЛЬНИК ДЕНЬ-1")
-                video_path = "C:\\Users\\User\\Downloads\\ИЗБ-СР.MP4"
-                with open(video_path, 'rb') as video:
+                with open('ИЗБ-СР.MP4', 'rb') as video:
                     await message.answer_video(video)
                     await message.answer("СРЕДА ДЕНЬ-2")
-                    video_path = "C:\\Users\\User\\Downloads\\ИЗБ-ПТ.MP4"
-                    with open(video_path, 'rb') as video:
+                    with open('ИЗБ-ПН.MP4', 'rb') as video:
                         await message.answer_video(video)
                         await message.answer("ПЯТНИЦА ДЕНЬ-3")
-                photo_path = "C:\\Users\\User\\Downloads\\ЧЕК ЛИСТ01.jpg"
-                with open(photo_path, 'rb') as photo:
+                with open('ЧЕК ЛИСТ01.jpg', 'rb') as photo:
                     await message.answer_photo(photo)
                     await message.answer("Получить дальнейшие инструкции?", reply_markup=instruc)
                     await Test.ENDFUNC.set()
 
     elif 30 <= bmi:
-        photo_path = "C:\\Users\\User\\Downloads\\Untitled (41).png"
-        with open(photo_path, 'rb') as photo:
+        with open('Untitled (41).png', 'rb') as photo:
             await message.answer_photo(photo)
             await message.answer(f"Ваш (ИМТ) Индекс Массы Тела в избытке слишком(лишний вес){bmi}\n"
                                                                       f"ДЛЯ НАБОРА МАССЫ И СНИЖЕНИЕ ЖИРА:\n"
@@ -487,8 +473,7 @@ async def answer_end(message: types.Message, state: FSMContext):
             delay_seconds = 4
             await asyncio.sleep(delay_seconds)
 
-            photo_path = "C:\\Users\\User\\Downloads\\Untitled (46).png"
-            with open(photo_path, 'rb') as photo:
+            with open('Untitled (46).png', 'rb') as photo:
                 await message.answer_photo(photo)
             delay_seconds = 2
             await asyncio.sleep(delay_seconds)
@@ -496,20 +481,16 @@ async def answer_end(message: types.Message, state: FSMContext):
             delay_seconds = 3
             await asyncio.sleep(delay_seconds)
             random_numbers = int(''.join(str(random.randint(1, 9)) for _ in range(10)))
-            video_path = "C:\\Users\\User\\Downloads\\ОЧИЗБ-ПН01.MP4"
-            with open(video_path, 'rb') as video:
+            with open('ОЧИЗБ-ПН.MP4', 'rb') as video:
                 await message.answer_video(video)
                 await message.answer("ПОНЕДЕЛЬНИК ДЕНЬ-1")
-                video_path = "C:\\Users\\User\\Downloads\\ОЧИЗБ-СР.MP4"
-                with open(video_path, 'rb') as video:
+                with open('ОЧИЗБ-СР.MP4', 'rb') as video:
                     await message.answer_video(video)
                     await message.answer("СРЕДА ДЕНЬ-2")
-                    video_path = "C:\\Users\\User\\Downloads\\ОЧИЗБ-ПТ.MP4"
-                    with open(video_path, 'rb') as video:
+                    with open('ОЧИЗБ-ПТ.MP4', 'rb') as video:
                         await message.answer_video(video)
                         await message.answer("ПЯТНИЦА ДЕНЬ-3")
-                photo_path = "C:\\Users\\User\\Downloads\\ЧЕК ЛИСТ.jpg"
-                with open(photo_path, 'rb') as photo:
+                with open('ЧЕК ЛИСТ.jpg', 'rb') as photo:
                     await message.answer_photo(photo)
                     await message.answer("Получить дальнейшие инструкции?", reply_markup=instruc)
                     await Test.ENDFUNC.set()

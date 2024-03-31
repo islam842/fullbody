@@ -31,8 +31,7 @@ async def answer_quiz(message: types.Message, state: FSMContext):
                              "Руки должны быть прямыми и вертикальными относительно пола.\n"
                              "\n"
                              "Как показано ниже:", reply_markup=kbfuncthree)
-        video_path = "C:\\Users\\User\\Downloads\\ЖИМ ЛЕЖА ПРАВИЛЬНОЕ.mp4"
-        with open(video_path, 'rb') as video:
+        with open('ЖИМ ЛЕЖА ПРАВИЛЬНОЕ.mp4', 'rb') as video:
             await message.answer_video(video)
     elif answer == "Как делать приседания со штангой?":
         await message.answer(
@@ -47,8 +46,7 @@ async def answer_quiz(message: types.Message, state: FSMContext):
             "Сосредотачивайтесь на том, чтобы использовать силу ног для подъема, а не наклоняться вперед..\n"
             "\n"
             "Как показано ниже:", reply_markup=kbfuncthree)
-        photo_path = "C:\\Users\\User\\Downloads\\ПРАВИЛЬНО ПРИСЕДАНЯИ ФИНАЛ.png"
-        with open(photo_path, 'rb') as photo:
+        with open('ПРАВИЛЬНО ПРИСЕДАНЯИ ФИНАЛ.png', 'rb') as photo:
             await message.answer_photo(photo)
     elif answer == "Как делать отжимания?":
         await message.answer("Отжимания - это отличное упражнение для тренировки верхней части тела\n"
@@ -67,8 +65,7 @@ async def answer_quiz(message: types.Message, state: FSMContext):
                              "Следите за тем, чтобы тело двигалось как одно целое.\n"
                              "\n"
                              "Как показано ниже:", reply_markup=kbfuncthree)
-        photo_path = "C:\\Users\\User\\Downloads\\КАК.jpg"
-        with open(photo_path, 'rb') as photo:
+        with open('КАК.jpg', 'rb') as photo:
             await message.answer_photo(photo)
     elif answer == "Как делать французкий жим?":
         await message.answer("Французский жим (Tricep French Press) - это упражнение, направленное на тренировку трiceps.\n"
@@ -86,8 +83,7 @@ async def answer_quiz(message: types.Message, state: FSMContext):
                              "4.Силой трiceps поднимите вес обратно в исходное положение, возвращаясь к вертикальному положению рук.\n"
                              "\n"
                              "Как показано ниже:", reply_markup=kbfuncthree)
-        photo_path = "C:\\Users\\User\\Downloads\\ФРАНЦЗ ЖИМ ФИНАЛЛ.png"
-        with open(photo_path, 'rb') as photo:
+        with open('ФРАНЦЗ ЖИМ ФИНАЛЛ.png', 'rb') as photo:
             await message.answer_photo(photo)
     elif answer == "Как делать подтягивание?":
         await message.answer("1.Руки расположите шире, чем ширина плеч."
@@ -103,8 +99,7 @@ async def answer_quiz(message: types.Message, state: FSMContext):
                              "5.Медленно опускайтесь вниз, контролируя движение. Избегайте рывков и падений.\n"
                              "\n"
                              "Как показано ниже:", reply_markup=kbfuncthree)
-        photo_path = "C:\\Users\\User\\Downloads\\ПРАВ ПОДТЯГИВАНИЕ.png"
-        with open(photo_path, 'rb') as photo:
+        with open('ПРАВ ПОДТЯГИВАНИЕ.png', 'rb') as photo:
             await message.answer_photo(photo)
     elif answer == "Как делать брусья?":
         await message.answer("1.Поставьте руки на брусья, ладони внизу, направлены вперед.\n"
@@ -118,8 +113,7 @@ async def answer_quiz(message: types.Message, state: FSMContext):
                              "Контролируйте движение вверх и вниз, избегая рывков и контролируя силу мышц.\n"
                              "\n"
                              "Как показано ниже:", reply_markup=kbfuncthree)
-        photo_path = "C:\\Users\\User\\Downloads\\прав брусиии.png"
-        with open(photo_path, 'rb') as photo:
+        with open('прав брусиии.png', 'rb') as photo:
             await message.answer_photo(photo)
     elif answer == "ЗАВЕРШИТЬ":
         await message.answer("Отправляй команду (/start) что бы начать сначала.")
