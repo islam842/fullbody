@@ -40,7 +40,7 @@ class Test(StatesGroup):
 @dp.message_handler(commands=['start'])
 async def answer_q1(message: types.Message, state: FSMContext):
     answer = message.text.strip().lower()
-    with open('photo\\Изображение WhatsApp 2023-05-22 в 00..jpg', 'rb') as photo:
+    with open('Untitled 03-06-2023 06-48-36.png', 'rb') as photo:
         await message.answer_photo(photo)
     await message.answer('Добро пожаловать в уникальный Телеграмм бот для тренировок и набора массы!\n'
                          'FULLBODY - Ваш персональный тренер!'
