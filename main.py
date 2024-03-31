@@ -40,7 +40,7 @@ class Test(StatesGroup):
 @dp.message_handler(commands=['start'])
 async def answer_q1(message: types.Message, state: FSMContext):
     answer = message.text.strip().lower()
-    with open('Untitled 03-06-2023 06-48-36.png', 'rb') as photo:
+    with open('Untitled 50.png', 'rb') as photo:
         await message.answer_photo(photo)
     await message.answer('Добро пожаловать в уникальный Телеграмм бот для тренировок и набора массы!\n'
                          'FULLBODY - Ваш персональный тренер!'
@@ -73,8 +73,7 @@ async def answer_q2(message: types.Message, state: FSMContext):
         await message.answer("Как вас зовут?")
         await Test.Q3.set()  # Переход к третьему вопросу
     elif answer == "О НАС":
-        photo_path = "C:\\Users\\User\\OneDrive\\Изображения\\Untitled (9).png"
-        with open(photo_path, 'rb') as photo:
+        with open('Untitled (9).png', 'rb') as photo:
             # Отправляем фото в чат
             await message.answer_photo(photo)
         await message.answer("Добро пожаловать в мир FULLBODY! Мы - стартап-проект, созданный с любовью к здоровью "
@@ -342,8 +341,7 @@ async def answer_end(message: types.Message, state: FSMContext):
     bmi = round(bmi, 2)
 
     if bmi < 18.5:
-            photo_path = "C:\\Users\\User\\Downloads\\Untitled (38).png"
-            with open(photo_path, 'rb') as photo:
+            with open('Untitled (38).png', 'rb') as photo:
                 await message.answer_photo(photo)
                 await message.answer(f"Ваш (ИМТ) Индекс Массы Тела низкий(МАССА ТЕЛА НИЗКАЯ):{bmi}\n"
                                      f"ДЛЯ НАБОРА МАССЫ:\n"
@@ -356,26 +354,23 @@ async def answer_end(message: types.Message, state: FSMContext):
                 delay_seconds = 5
                 await asyncio.sleep(delay_seconds)
                 await message.answer("Программа тренировок готова!")
+                await message.answer("https://disk.yandex.ru/d/m1ejkLXAt7gffQ")
                 delay_seconds = 4
                 await asyncio.sleep(delay_seconds)
-                photo_path = "C:\\Users\\User\\Downloads\\Untitled (46).png"
-                with open(photo_path, 'rb') as photo:
+                with open('Untitled (46).png', 'rb') as photo:
                     await message.answer_photo(photo)
                 delay_seconds = 4
                 await asyncio.sleep(delay_seconds)
                 await message.answer("Обработка...")
                 delay_seconds = 4
                 await asyncio.sleep(delay_seconds)
-                video_path = "C:\\Users\\User\\Downloads\\НИЗ-ПН.MP4"
-                with open(video_path, 'rb') as video:
+                with open('НИЗ-ПН1.MP4', 'rb') as video:
                     await message.answer_video(video)
                     await message.answer("ПОНЕДЕЛЬНИК ДЕНЬ-1")
-                    video_path = "C:\\Users\\User\\Downloads\\НИЗ-ВТ.MP4"
-                    with open(video_path, 'rb') as video:
+                    with open('НИЗ-ВТ.MP4', 'rb') as video:
                         await message.answer_video(video)
                         await message.answer("СРЕДА ДЕНЬ-2")
-                        video_path = "C:\\Users\\User\\Downloads\\НИЗ-ПТ.MP4"
-                        with open(video_path, 'rb') as video:
+                        with open('НИЗ-ПТ1.MP4', 'rb') as video:
                             await message.answer_video(video)
                             await message.answer("ПЯТНИЦА ДЕНЬ-3")
                     photo_path = "C:\\Users\\User\\Downloads\\ЧЕК ЛИСТ01.jpg"
