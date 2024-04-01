@@ -43,7 +43,7 @@ async def answer_q1(message: types.Message, state: FSMContext):
     with open('Untitled 50.png', 'rb') as photo:
         await message.answer_photo(photo)
     await message.answer('Добро пожаловать в уникальный Телеграмм бот для тренировок и набора массы!\n'
-                         'FULLBODY - Ваш персональный тренер!'
+                         'FULLBODY(BETA)- Ваш персональный тренер!'
                          '\n'
                          'Наш бот адаптируется к вашим потребностям, учитывая ваше:\n'
                          '\n'
@@ -68,7 +68,8 @@ async def answer_q2(message: types.Message, state: FSMContext):
                              "\n"
                              "Официальный телеграм канал - https://t.me/fullbodyproject \n"
                              "Официальный инстаграм аккаунт - https://www.instagram.com/fullbody_project?igsh=NTVldTJ0YmkxZzg3&utm_source=qr\n")
-        delay_seconds = 8
+        await message.answer("секунду...")
+        delay_seconds = 6
         await asyncio.sleep(delay_seconds)
         await message.answer("Как вас зовут?")
         await Test.Q3.set()  # Переход к третьему вопросу
@@ -100,6 +101,11 @@ async def answer_q2(message: types.Message, state: FSMContext):
     elif answer == "ФУНКЦИИ БОТА":
         await message.answer("ВЫБЕРИТЕ ФУНКЦИЮ", reply_markup=func_markup)
         await Test.FUNC1.set()
+    elif answer == "ПОДДЕРЖАТЬ ПРОЕКТ":
+        await message.answer("Спасибо за обращение!\n"
+                             "Обратитесь создателям проекта: @theiws")
+        await message.answer("Вы в меню выберите команду:",reply_markup=b_markup)
+        await Test.MENU.set()
     else:
         await message.answer("Выберите команду!")
 

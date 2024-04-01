@@ -22,6 +22,7 @@ answer_markup = ReplyKeyboardMarkup(
     KeyboardButton("НАЧАТЬ!"),
     KeyboardButton("ХОЧУ ЗАДАТЬ ВОПРОС"),
     KeyboardButton("МЕНЮ"),
+    KeyboardButton("ПОДДЕРЖАТЬ ПРОЕКТ"),
 
 
 
