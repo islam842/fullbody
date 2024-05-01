@@ -3,7 +3,7 @@ import asyncio
 from aiogram import Dispatcher, types
 from aiogram.dispatcher import FSMContext
 from aiogram.dispatcher.filters.state import StatesGroup, State
-from Keyboards.client_kb import kbfinish
+from Keyboards.client_kb import kbfinish, oneend
 
 
 class TrainingStates(StatesGroup):
@@ -59,9 +59,11 @@ async def set_rest_duration(message: types.Message, state: FSMContext):
 
         await message.answer(f"Прекрасно! Тренировка начинается.\n"
                              f"\n"
-                             f"Общая длительность тренировки - {training_duration} минут,\n"
-                             f"Упражнение будет длиться {exercise_duration} минут,\n"
-                             f"После чего будет перерыв в течение {rest_duration} минут.\n")
+                             f"Общая длительность тренировки - ({training_duration}) минут,\n"
+                             f"\n"
+                             f"Упражнение будет длиться - ({exercise_duration}) минут,\n"
+                             f"\n"
+                             f"После чего будет перерыв в течение - ({rest_duration}) минут.\n")
         await asyncio.sleep(2)  # Задержка для подготовки пользователя
         await start_workout(message, training_duration, exercise_duration, rest_duration)
     else:
@@ -92,7 +94,7 @@ async def start_workout(message: types.Message, training_duration: int, exercise
 @dp.message_handler(state=TrainingStates.END)
 async def end(message: types.Message, state: FSMContext):
     answer = message.text.strip()
-    if answer == "ЗАВЕРШИТЬ":
+    if answer == "ЗАВЕРШИТЬ" or answer == "1":
         await message.answer("Тренировка завершена! Что бы вернуться в начало введи команду \n"
                              "(/start)")
         await state.finish()

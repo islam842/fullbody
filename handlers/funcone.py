@@ -3,7 +3,7 @@ from aiogram import Dispatcher, types
 from aiogram.dispatcher import FSMContext
 from aiogram.dispatcher.filters.state import StatesGroup, State
 from Keyboards.client_kb import healfunc, nabor, gived
-
+import asyncio
 
 class TrainingStates(StatesGroup):
     SET_TRAINING_DURATION = State()
@@ -22,7 +22,8 @@ async def start(message: types.Message):
 async def set_training_duration(message: types.Message, state: FSMContext):
     training_duration = message.text
     await state.update_data(training_duration=training_duration)
-    await message.answer("Укажите свой вес(kg):")
+    await message.answer("Укажите свой вес(kg):\n"
+                         "Например - 60")
     await TrainingStates.SET_EXERCISE_DURATION.set()
 
 
@@ -43,6 +44,8 @@ async def set_rest_duration(message: types.Message, state: FSMContext):
 async def set_rest_duration(message: types.Message, state: FSMContext):
     exercise_duration = message.text
     await state.update_data(exercise_duration=exercise_duration)
+    await message.answer("Обработка...")
+    await asyncio.sleep(5)
     async with state.proxy() as data:
         training_duration = data['training_duration']
         rest_duration = data['rest_duration']

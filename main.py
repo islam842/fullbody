@@ -2,19 +2,21 @@ from config import dp
 from aiogram.dispatcher import FSMContext
 from aiogram.dispatcher.filters.state import State, StatesGroup
 import logging
-from Keyboards.client_kb import answer_markup, give, ans_markup, instruc, submit_markup, givetrue, cancel_markup, active_markup, mot_markup, an_markup, a_markup, b_markup, FUNC, func_markup
+from Keyboards.client_kb import answer_markup, give, ans_markup, pro, pro1, instruc, givegym, submit_markup, givetrue, cancel_markup, active_markup, mot_markup, an_markup, a_markup, b_markup, FUNC, func_markup
 import asyncio
 import random
 from handlers.functwo import register_handlers_extra  # Импортируем функции из вашего файла handlers
 from handlers.funcone import register_handlers_extra1  # Импортируем функции из вашего файла handlers
 from handlers.functhree import register_handlers_extraa  # Импортируем функции из вашего файла handlers
+from handlers.funcfour import register_handlers_extras
 from aiogram import types
 from aiogram.dispatcher.filters import Command
 from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 
-logging.basicConfig(level=logging.INFO)
-register_handlers_extra1(dp)
-register_handlers_extraa(dp)
+# logging.basicConfig(level=logging.INFO)
+# register_handlers_extra1(dp)
+# register_handlers_extraa(dp)
+# register_handlers_extras(dp)
 
 
 class Test(StatesGroup):
@@ -35,6 +37,9 @@ class Test(StatesGroup):
     MENU = State()
     QUIZ = State()
     ENDFUNC = State()
+    PRO = State()
+    PRO1 = State()
+
 
 
 @dp.message_handler(commands=['start'])
@@ -43,6 +48,7 @@ async def answer_q1(message: types.Message, state: FSMContext):
     with open('Untitled 50.png', 'rb') as photo:
         await message.answer_photo(photo)
     await message.answer('Добро пожаловать в уникальный Телеграмм бот для тренировок и набора массы!\n'
+                         '\n'
                          'FULLBODY(BETA)- Ваш персональный тренер!'
                          '\n'
                          'Наш бот адаптируется к вашим потребностям, учитывая ваше:\n'
@@ -67,7 +73,7 @@ async def answer_q2(message: types.Message, state: FSMContext):
         await message.answer("Подпишитесь на наши каналы:\n"
                              "\n"
                              "Официальный телеграм канал - https://t.me/fullbodyproject \n"
-                             "Официальный инстаграм аккаунт - https://www.instagram.com/fullbody_project?igsh=NTVldTJ0YmkxZzg3&utm_source=qr\n")
+                             "Официальный инстаграм аккаунт - \n")
         await message.answer("секунду...")
         delay_seconds = 6
         await asyncio.sleep(delay_seconds)
@@ -95,6 +101,9 @@ async def answer_q2(message: types.Message, state: FSMContext):
     elif answer == "ХОЧУ ЗАДАТЬ ВОПРОС":
         await message.answer("Выберите вопрос который хотите задать?", reply_markup=submit_markup)
         await Test.QUIZ.set()
+    elif answer == "ПОЛНАЯ-ПРО ВЕРСИЯ":
+        await message.answer("FULLBODY-PRO - Более 10+ уникальных, персональных функций и отличий!\n", reply_markup=pro1)
+        await Test.PRO.set()
     elif answer == "МЕНЮ":
         await message.answer("Вы в меню выберите команду:", reply_markup=b_markup)
         await Test.MENU.set()
@@ -266,6 +275,11 @@ async def menu(message: types.Message, state: FSMContext):
     elif answer == "ФУНКЦИИ БОТА":
         await message.answer("ВЫБЕРИТЕ ФУНКЦИЮ", reply_markup=func_markup)
         await Test.FUNC1.set()
+    elif answer == "ПОЛНАЯ-ПРО ВЕРСИЯ":
+        await message.answer("ВЫБЕРИТЕ ФУНКЦИЮ", reply_markup=pro1)
+        await Test.FUNC1.set()
+    else:
+        await message.answer("Введите команду!", reply_markup=b_markup)
 
 
 @dp.message_handler(state=Test.FUNC1)
@@ -307,6 +321,67 @@ async def answer_end(message: types.Message, state: FSMContext):
                              "Оправляй команду что бы начать.", reply_markup=givetrue)
         await state.finish()
         register_handlers_extraa(dp)
+    elif answer == "УВЕЛИЧИТЬ ЖИМ":
+       await message.answer("GYMFUNC - Это функция бота с которой вы сможете увеличить свой жим и пожать рекорд!.\n"
+                         "Пользы функции:\n"
+                         "\n"
+                         "-Экономит ваше время!\n"
+                         "-Эффективно увеличит ваш жим лежа!\n"
+                         "-Подскажет что и как правильно!\n"
+                         "-Спасет от травм!\n"
+                         "-Удобно, просто!\n"
+                         "-Полный план до рекордного жима!\n"
+                         "\n"
+                         "Оправляй команду что бы начать.", reply_markup=givegym)
+       await state.finish()
+       register_handlers_extras(dp)
+    else:
+        await message.answer("Введите команду!")
+
+
+
+@dp.message_handler(state=Test.PRO)
+async def answer_end(message: types.Message, state: FSMContext):
+    answer = message.text.strip()
+    if answer == "УЗНАТЬ БОЛЬШЕ":
+        await message.answer("FULLBODY-PRO - МНОГОФУНКИОНАЛЬНАЯ СБОРКА ВСЕХ ТИПОВ САМОРАЗВИТИЯ И ФУНКЦИЙ.\n"
+                             "\n"
+                             "ЧТО ВКЛЮЧАЕТ В СЕБЯ:\n"
+                             "\n"
+                             "-1.Персональные рекомендации - учитывая ваши уникальности!\n"
+                             "-2.Прямое обращение к тренеру!\n"
+                             "-3.Уникальные функции!\n"
+                             "-4.План тренировок!\n"
+                             "-5.Рекомендациями по всем критериям внешности-\n"
+                             "\n"
+                             "                  -Рост\n"
+                             "                  -Кожа\n"
+                             "                  -Тестостерон\n"
+                             "                  -Тело\n"
+                             "\n"
+                             "-6.Персональные, личные советы!", reply_markup=pro)
+
+        await Test.PRO1.set()
+
+
+@dp.message_handler(state=Test.PRO1)
+async def answer_end(message: types.Message, state: FSMContext):
+        answer = message.text.strip()
+        if answer == "ЧЕМ СДЕЛАЕТ МЕНЯ ЛУЧШЕ?":
+            await message.answer("Сделает вас лучше:\n"
+            "\n"
+            "-Дисциплиной!\n"
+            "-Персональным планом тренировок!\n"
+            "-Персональным планом питания!\n"
+            "-Личным тренером!\n"
+            "-Правильной техникой!\n"
+            "-Персональными советами!\n"
+            "-Уникальными функциями!\n"
+            "\n"
+            "ПОЛНАЯ ВЕРСИЯ БУДЕТ ДОСТУПНА ПОЗЖЕ!")
+            await message.answer("Отправлй команду (/start) что бы начать с начало!")
+        await state.finish()
+
 
 
 @dp.message_handler(state=Test.FUNC2)

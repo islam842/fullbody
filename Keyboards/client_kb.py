@@ -7,8 +7,8 @@ ans_markup = ReplyKeyboardMarkup(
 ).add(
     KeyboardButton("НАЧАТЬ!"),
     KeyboardButton("О НАС"),
-    KeyboardButton("МЕНЮ"),
     KeyboardButton("ФУНКЦИИ БОТА"),
+    KeyboardButton("ПОЛНАЯ-ПРО ВЕРСИЯ"),
 
 )
 
@@ -110,7 +110,9 @@ b_markup = ReplyKeyboardMarkup(
 ).add(
     KeyboardButton("НАЧАТЬ!"),
     KeyboardButton("ФУНКЦИИ БОТА"),
-    KeyboardButton("ХОЧУ ЗАДАТЬ ВОПРОС")
+    KeyboardButton("ХОЧУ ЗАДАТЬ ВОПРОС"),
+    KeyboardButton("О НАС")
+
 )
 
 func_markup = ReplyKeyboardMarkup(
@@ -121,7 +123,8 @@ func_markup = ReplyKeyboardMarkup(
 ).add(
     KeyboardButton("ЗАНЯТИЕ ВМЕСТЕ"),
     KeyboardButton("ПЛАН ПИТАНИЯ"),
-    KeyboardButton("ПРАВИЛЬНАЯ ТЕХНИКА УПРАЖНЕНИЙ")
+    KeyboardButton("ПРАВИЛЬНАЯ ТЕХНИКА УПРАЖНЕНИЙ"),
+    KeyboardButton("УВЕЛИЧИТЬ ЖИМ")
 
 
 )
@@ -225,5 +228,47 @@ instruc = ReplyKeyboardMarkup(
 
 ).add(
     KeyboardButton("ПОЛУЧИТЬ ИНСТРУКЦИЮ")
+
+
+)
+
+oneend = ReplyKeyboardMarkup(
+    resize_keyboard=True,
+    one_time_keyboard=True
+
+
+).add(
+    KeyboardButton("1")
+
+)
+
+givegym = ReplyKeyboardMarkup(
+    resize_keyboard=True,
+    one_time_keyboard=True
+
+
+).add(
+    KeyboardButton("/gymfunc"),
+
+)
+
+
+pro = ReplyKeyboardMarkup(
+    resize_keyboard=True,
+    one_time_keyboard=True
+
+
+).add(
+    KeyboardButton("ЧЕМ СДЕЛАЕТ МЕНЯ ЛУЧШЕ?"),
+
+)
+
+pro1 = ReplyKeyboardMarkup(
+    resize_keyboard=True,
+    one_time_keyboard=True
+
+
+).add(
+    KeyboardButton("УЗНАТЬ БОЛЬШЕ"),
 
 )
